@@ -76,9 +76,18 @@ export default function Page() {
 
   const handleVariantChange = (size: string, color: string) => {
     if (product?.variants) {
-      const variant = product.variants.find(
-        (v) => v.taille === size && v.couleur === color
-      );
+      const variant = product.variants.find((v) => {
+        // Si une taille est spécifiée, elle doit correspondre
+        const sizeMatch = size ? v.taille === size : true;
+
+        // Si une couleur est spécifiée (non vide), elle doit correspondre
+        // Sinon, on accepte les variantes sans couleur (null ou undefined)
+        const colorMatch = color
+          ? v.couleur === color
+          : (!v.couleur || v.couleur === null);
+
+        return sizeMatch && colorMatch;
+      });
       if (variant) {
         setSelectedVariant(variant);
       }
@@ -485,8 +494,8 @@ export default function Page() {
 
               {/* Bouton d'ajout au panier */}
               <Button
-                className="w-full h-14 text-lg font-semibold bg-black hover:bg-gray-800 text-white rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-                disabled={selectedVariant?.quantity === 0}
+                className="w-full h-14 text-lg font-semibold bg-black hover:bg-gray-800 text-white rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                disabled={getMaxQuantity() === 0}
                 onClick={() => {
                   if (product) {
                     const maxQuantity = getMaxQuantity();
@@ -512,7 +521,7 @@ export default function Page() {
                 }}
               >
                 <IconShoppingCart className="h-6 w-6 mr-3" />
-                Ajouter au panier
+                {getMaxQuantity() === 0 ? "Rupture de stock" : "Ajouter au panier"}
               </Button>
             </div>
 
