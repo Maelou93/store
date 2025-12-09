@@ -9,8 +9,8 @@ const nextConfig: NextConfig = {
       },
     ],
     // Utiliser le loader d'UploadThing directement au lieu de l'optimisation Vercel
-    loader: "custom",
-    loaderFile: "./src/lib/image-loader.ts",
+    /* loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts", */
   },
 };
 
