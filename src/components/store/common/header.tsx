@@ -46,13 +46,15 @@ export const Header = () => {
             <Link href="/">
               <Image src={Logo} alt="" className="w-36 h-auto" />
             </Link>
-            {!isMobile ? <NavMenu /> : <NavBarMobile />}
+            <div className="hidden md:block">
+              <NavMenu />
+            </div>
             <div className="flex items-center gap-3">
               <WishlistIcon />
               <CartDrawer />
-
-              {/* Mobile Menu */}
-              <div className="md:hidden"></div>
+              <div className="md:hidden">
+                <NavBarMobile />
+              </div>
             </div>
           </div>
         </div>

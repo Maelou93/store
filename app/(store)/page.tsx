@@ -7,15 +7,13 @@ import Video from "@/components/store/home/video";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-stone-100">
       <Hero />
-      <CustomerExperience />
-
       <CategoriesSection />
-
       <FeaturedProducts />
       <PromoSection />
       <Video />
+      <CustomerExperience />
     </main>
   );
 }

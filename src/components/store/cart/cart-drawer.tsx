@@ -221,18 +221,17 @@ export const CartDrawer = () => {
       direction="right"
     >
       <DrawerTrigger asChild>
-        <Button
-          className="relative rounded-full"
-          size="icon"
+        <div
           onClick={openCart}
+          className="relative flex items-center justify-center w-10 h-10 hover:text-yellow-500 text-stone-700 transition-all duration-300 cursor-pointer"
         >
-          <IconShoppingCart className="h-5 w-5" />
+          <IconShoppingCart className="h-5 w-5" stroke={1.5} />
           {hasHydrated && getTotalItems() > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            <span className="absolute -top-1.5 -right-1.5 bg-yellow-400 text-stone-900 text-[10px] font-black w-4 h-4 flex items-center justify-center">
               {getTotalItems()}
             </span>
           )}
-        </Button>
+        </div>
       </DrawerTrigger>
       <DrawerContent className="h-full w-full sm:max-w-md sm:ml-auto right-0 top-0 bottom-0 fixed z-50 sm:rounded-l-lg data-[vaul-drawer-direction=right]:w-full sm:data-[vaul-drawer-direction=right]:w-auto">
         <DrawerHeader className="border-b">

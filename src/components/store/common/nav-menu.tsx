@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import * as React from "react";
 
 import {
   NavigationMenu,
@@ -13,7 +12,9 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
-const menuFemme: { titre: string; link: string }[] = [
+type MenuItem = { titre: string; link: string } | { titre: string; link?: never; children: { titre: string; link: string }[] };
+
+const menuItems: MenuItem[] = [
   {
     titre: "Manteaux/Vestes",
     link: "/categories/femmes/vetements/manteaux-vestes",
@@ -32,38 +33,18 @@ const menuFemme: { titre: string; link: string }[] = [
   },
   {
     titre: "Chaussures",
-    link: "/categories/femmes/chaussures",
+    children: [
+      { titre: "Chaussures femme", link: "/categories/femmes/chaussures" },
+      { titre: "Chaussures homme", link: "/categories/hommes/chaussures" },
+    ],
   },
   {
-    titre: "Accesoires",
+    titre: "Sacs",
+    link: "/categories/femmes/vetements/sacs",
+  },
+  {
+    titre: "Accessoires",
     link: "/categories/femmes/vetements/accessoires",
-  },
-];
-
-const menuHomme: { titre: string; link: string }[] = [
-  {
-    titre: "Manteaux/Vestes",
-    link: "/categories/hommes/vetements/manteaux-vestes",
-  },
-  {
-    titre: "Hauts/Top",
-    link: "/categories/hommes/vetements/hauts-top",
-  },
-  {
-    titre: "Pantalons",
-    link: "/categories/hommes/vetements/pantalons",
-  },
-  {
-    titre: "Ensembles",
-    link: "/categories/hommes/vetements/ensembles",
-  },
-  {
-    titre: "Chaussures",
-    link: "/categorie/hommes/chaussures",
-  },
-  {
-    titre: "Accesoires",
-    link: "/categories/hommes/vetements/accessoires",
   },
 ];
 
@@ -71,60 +52,41 @@ export function NavMenu() {
   return (
     <NavigationMenu viewport={false} className="z-50">
       <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>POUR ELLE</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-2 w-[200px]">
-              {menuFemme.map((menu) => (
-                <ListItem
-                  key={menu.titre}
-                  title={menu.titre}
-                  href={menu.link}
-                ></ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>POUR LUI</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-2 w-[200px]">
-              {menuHomme.map((menu) => (
-                <ListItem
-                  key={menu.titre}
-                  title={menu.titre}
-                  href={menu.link}
-                ></ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/wishlist">FAVORIS</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
+        {menuItems.map((menu) =>
+          "children" in menu ? (
+            <NavigationMenuItem key={menu.titre}>
+              <NavigationMenuTrigger className="text-sm font-medium">
+                {menu.titre.toUpperCase()}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="flex flex-col w-44 p-2">
+                  {menu.children.map((child) => (
+                    <li key={child.titre}>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href={child.link}
+                          className="block px-3 py-2 text-xs font-semibold uppercase tracking-wide hover:bg-stone-100 rounded transition-colors"
+                        >
+                          {child.titre}
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          ) : (
+            <NavigationMenuItem key={menu.titre}>
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href={menu.link}>{menu.titre.toUpperCase()}</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          )
+        )}
       </NavigationMenuList>
     </NavigationMenu>
-  );
-}
-
-function ListItem({
-  title,
-  children,
-  href,
-  ...props
-}: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
-  return (
-    <li {...props}>
-      <NavigationMenuLink asChild>
-        <Link href={href}>
-          <div className="text-sm leading-none font-medium">{title}</div>
-          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-            {children}
-          </p>
-        </Link>
-      </NavigationMenuLink>
-    </li>
   );
 }

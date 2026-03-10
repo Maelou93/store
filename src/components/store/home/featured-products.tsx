@@ -38,32 +38,15 @@ export default function FeaturedProducts() {
     getFeaturedProducts();
   }, [collection]);
 
-  const scrollPrev = () => {
-    api?.scrollPrev();
-  };
-
-  const scrollNext = () => {
-    api?.scrollNext();
-  };
-
   if (isLoading) {
     return (
-      <section className="py-6 bg-white">
-        <div className="text-center">
-          <div className="inline-flex items-center px-4 py-2 border border-black/20 text-black text-sm font-medium mb-6">
-            NOUVEAUTÉS
-          </div>
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-48 mx-auto mb-8"></div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="space-y-4">
-                  <div className="aspect-[4/5] bg-gray-200 rounded"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                </div>
-              ))}
-            </div>
+      <section className="py-16 bg-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="h-6 bg-stone-300 rounded w-40 mb-12 animate-pulse" />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="aspect-[3/4] bg-stone-300 animate-pulse rounded" />
+            ))}
           </div>
         </div>
       </section>
@@ -72,157 +55,124 @@ export default function FeaturedProducts() {
 
   if (!products || products.length === 0) {
     return (
-      <section className="py-20 bg-white">
-        <div className="text-center">
-          <div className="inline-flex items-center px-4 py-2 border border-black/20 text-black text-sm font-medium mb-6">
-            NOUVEAUTÉS
-          </div>
-          <h2 className="text-4xl md:text-5xl font-light text-black mb-4 tracking-wide">
-            Nos dernières
-            <span className="block font-medium">nouveautés</span>
-          </h2>
-          <p className="text-lg text-gray-600 font-light">
-            Aucun produit disponible pour le moment.
-          </p>
+      <section className="py-16 bg-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-zinc-500">Aucun produit disponible pour le moment.</p>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="pt-16 pb-8 md:pb-16 bg-white">
-      <div className="mb-16">
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="inline-flex items-center px-4 py-2 border border-black/20 text-black text-sm font-medium mb-6">
-            NOUVEAUTÉS
-          </h2>
-          {/* <h2 className="text-3xl md:text-4xl font-light text-black mb-4 tracking-wide">
-            Nos dernières nouveautés
-          </h2> */}
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light">
-            Découvrez notre sélection exclusive des dernières tendances
-          </p>
-        </div>
-
-        {/* Navigation Controls */}
-        <div className="flex justify-between items-center mb-8">
-          <div className="flex space-x-3">
+    <section className="py-16 bg-stone-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <span className="text-yellow-400 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
+              — FRESH
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-stone-900 uppercase leading-none">
+              Nouveautés
+            </h2>
+          </div>
+          {/* Nav controls */}
+          <div className="flex gap-2">
             <button
               type="button"
-              onClick={scrollPrev}
-              className="p-3 border border-black/20 hover:border-black hover:bg-black hover:text-white transition-all duration-300"
-              aria-label="Produit précédent"
+              onClick={() => api?.scrollPrev()}
+              className="w-10 h-10 border border-stone-300 hover:border-yellow-400 hover:text-yellow-400 text-stone-500 transition-all duration-300 flex items-center justify-center"
+              aria-label="Précédent"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               type="button"
-              onClick={scrollNext}
-              className="p-3 border border-black/20 hover:border-black hover:bg-black hover:text-white transition-all duration-300"
-              aria-label="Produit suivant"
+              onClick={() => api?.scrollNext()}
+              className="w-10 h-10 border border-stone-300 hover:border-yellow-400 hover:text-yellow-400 text-stone-500 transition-all duration-300 flex items-center justify-center"
+              aria-label="Suivant"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
         </div>
 
-        {/* Products Carousel */}
+        {/* Carousel */}
         <Carousel
           setApi={setApi}
           className="w-full"
-          opts={{
-            align: "start",
-            loop: true,
-          }}
+          opts={{ align: "start", loop: true }}
         >
-          <CarouselContent className="-ml-3 md:-ml-6">
+          <CarouselContent className="-ml-3 md:-ml-4">
             {products
               .filter((product: TypeProduct) => product.actif === true)
               .map((product: TypeProduct) => (
                 <CarouselItem
                   key={product.id}
-                  className="pl-3 md:pl-6 basis-1/2 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  className="pl-3 md:pl-4 basis-1/2 lg:basis-1/4"
                 >
-                  <Link
-                    href={`/produits/${product.slug}`}
-                    className="block group"
-                  >
-                    <div className="relative">
-                      {/* Product Image */}
-                      <div className="aspect-[4/5] overflow-hidden bg-gray-100 mb-3 relative border border-gray-200 group-hover:border-black transition-colors duration-300">
-                        {product.images &&
-                        product.images.length > 0 &&
-                        product.images[0] &&
-                        !isImageFailed(product.images[0]) ? (
-                          <Image
-                            src={product.images[0]}
-                            alt={product.nom}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                            quality={75}
-                            onError={() => handleImageError(product.images[0])}
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                            <span className="text-gray-400 text-sm font-light">
-                              {product.images[0] &&
-                              isImageFailed(product.images[0])
-                                ? "Image non disponible"
-                                : "Aucune image"}
-                            </span>
-                          </div>
-                        )}
-                        {/* Sale Badge */}
-                        {product.prixReduit && product.prixReduit > 0 && (
-                          <div className="absolute top-4 left-4 z-10">
-                            <span className="bg-black text-white px-3 py-1 text-xs font-medium">
-                              PROMO
-                            </span>
-                          </div>
-                        )}
+                  <Link href={`/produits/${product.slug}`} className="block group">
+                    {/* Image */}
+                    <div className="relative aspect-[3/4] overflow-hidden bg-stone-200 mb-3">
+                      {product.images && product.images.length > 0 && product.images[0] && !isImageFailed(product.images[0]) ? (
+                        <Image
+                          src={product.images[0]}
+                          alt={product.nom}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          sizes="(max-width: 768px) 50vw, 25vw"
+                          quality={75}
+                          onError={() => handleImageError(product.images[0])}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-stone-300">
+                          <span className="text-stone-500 text-sm">
+                            {product.images[0] && isImageFailed(product.images[0]) ? "Image non disponible" : "Aucune image"}
+                          </span>
+                        </div>
+                      )}
 
-                        {/* New Badge */}
-                        {product.collections?.some(
-                          (pc) =>
-                            pc.collection.nom.toLowerCase() === "nouveautés"
-                        ) && (
-                          <div
-                            className={`absolute top-4 z-10 ${
-                              product.prixReduit && product.prixReduit > 0
-                                ? "right-4"
-                                : "left-4"
-                            }`}
-                          >
-                            <span className="bg-green-600 text-white px-3 py-1 text-xs font-medium">
-                              NOUVEAU
-                            </span>
-                          </div>
+                      {/* Overlay on hover */}
+                      <div className="absolute inset-0 bg-stone-100/0 group-hover:bg-stone-100/20 transition-colors duration-300" />
+
+                      {/* Badges */}
+                      <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                        {product.prixReduit && product.prixReduit > 0 && (
+                          <span className="bg-orange-500 text-stone-900 px-2 py-0.5 text-xs font-black uppercase">
+                            PROMO
+                          </span>
+                        )}
+                        {product.collections?.some((pc) => pc.collection.nom.toLowerCase() === "nouveautés") && (
+                          <span className="bg-yellow-400 text-zinc-900 px-2 py-0.5 text-xs font-black uppercase">
+                            NEW
+                          </span>
                         )}
                       </div>
 
-                      {/* Product Info */}
-                      <div className="space-y-2">
-                        <h3 className="text-base font-medium text-black group-hover:text-gray-600 transition-colors duration-300">
-                          {product.nom}
-                        </h3>
-                        <div className="flex items-center space-x-2">
-                          {product.prixReduit && product.prixReduit > 0 ? (
-                            <>
-                              <span className="text-lg font-bold text-black">
-                                {product.prixReduit.toFixed(2)}€
-                              </span>
-                              <span className="text-sm text-gray-500 line-through font-light">
-                                {product.prix.toFixed(2)}€
-                              </span>
-                            </>
-                          ) : (
-                            <span className="text-lg font-medium text-black">
+                      {/* Bottom accent bar on hover */}
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                    </div>
+
+                    {/* Info */}
+                    <div>
+                      <h3 className="text-stone-900 text-sm font-bold uppercase tracking-wide truncate group-hover:text-yellow-400 transition-colors duration-300">
+                        {product.nom}
+                      </h3>
+                      <div className="flex items-center gap-2 mt-1">
+                        {product.prixReduit && product.prixReduit > 0 ? (
+                          <>
+                            <span className="text-orange-400 font-black text-base">
+                              {product.prixReduit.toFixed(2)}€
+                            </span>
+                            <span className="text-stone-500 line-through text-sm">
                               {product.prix.toFixed(2)}€
                             </span>
-                          )}
-                        </div>
+                          </>
+                        ) : (
+                          <span className="text-stone-900 font-bold text-base">
+                            {product.prix.toFixed(2)}€
+                          </span>
+                        )}
                       </div>
                     </div>
                   </Link>

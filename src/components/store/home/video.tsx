@@ -7,24 +7,16 @@ export default function Video() {
 
   if (isLoading) {
     return (
-      <section className="pt-4 pb-20 bg-white">
-        <div className="md:max-w-7xl md:mx-auto w-full">
-          <div className="animate-pulse">
-            <div className="grid md:grid-cols-2 gap-y-12 md:gap-x-28 md:px-0">
-              <div className="space-y-6 md:col-span-1">
-                <div className="space-y-4">
-                  <div className="h-8 bg-gray-200 rounded w-24"></div>
-                  <div className="h-12 bg-gray-200 rounded w-4/5"></div>
-                  <div className="space-y-2">
-                    <div className="h-4 bg-gray-200 rounded"></div>
-                    <div className="h-4 bg-gray-200 rounded w-4/5"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="aspect-w-16 aspect-h-9 md:col-span-1">
-                <div className="w-full h-64 bg-gray-200 rounded-lg"></div>
-              </div>
+      <section className="py-16 bg-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-4">
+              <div className="h-4 bg-stone-300 rounded w-24" />
+              <div className="h-12 bg-stone-300 rounded w-3/4" />
+              <div className="h-4 bg-stone-300 rounded" />
+              <div className="h-4 bg-stone-300 rounded w-4/5" />
             </div>
+            <div className="aspect-video bg-stone-300 rounded" />
           </div>
         </div>
       </section>
@@ -32,40 +24,85 @@ export default function Video() {
   }
 
   return (
-    <section className="pt-4 pb-20 bg-white">
-      <div className="md:max-w-7xl md:mx-auto w-full">
-        <div className="grid md:grid-cols-2 gap-y-12 md:gap-x-28 md:px-0">
-          {/* Contenu textuel */}
-          <div className="space-y-6 md:col-span-1">
-            <div className="space-y-4">
-              <div className="mb-4">
-                <span className="inline-block bg-black text-white px-3 py-1 rounded text-sm font-medium">
-                  IW STORE
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+    <section className="bg-stone-100 py-20 overflow-hidden">
+      {/* Top gradient bar */}
+      <div className="h-1 bg-gradient-to-r from-purple-500 via-yellow-400 to-orange-500 mb-20" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+          {/* Text */}
+          <div className="space-y-8">
+            <div>
+              <span className="text-purple-600 text-xs font-bold tracking-[0.3em] uppercase block mb-3">
+                — IW STORE
+              </span>
+              <h2 className="text-4xl md:text-5xl font-black text-stone-900 uppercase leading-none">
                 {config.promo_section_title}
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                {config.promo_section_description}
-              </p>
+            </div>
+            <p className="text-stone-500 text-base leading-relaxed border-l-2 border-purple-500 pl-4">
+              {config.promo_section_description}
+            </p>
+            {/* Accent lines */}
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-0.5 bg-purple-500" />
+              <div className="w-4 h-0.5 bg-yellow-400" />
+              <div className="w-2 h-0.5 bg-orange-500" />
+            </div>
+            {/* Stats row */}
+            <div className="flex gap-8 pt-2">
+              <div>
+                <p className="text-stone-900 text-2xl font-black">100+</p>
+                <p className="text-stone-400 text-xs uppercase tracking-wider">
+                  PRODUITS
+                </p>
+              </div>
+              <div className="w-px bg-stone-300" />
+              <div>
+                <p className="text-stone-900 text-2xl font-black">24h</p>
+                <p className="text-stone-400 text-xs uppercase tracking-wider">
+                  Livraison
+                </p>
+              </div>
+              <div className="w-px bg-stone-300" />
+              <div>
+                <p className="text-stone-900 text-2xl font-black">7j/7</p>
+                <p className="text-stone-400 text-xs uppercase tracking-wider">
+                  Support
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Vidéo */}
-          <div className="aspect-w-16 aspect-h-9 md:col-span-1">
-            <video
-              src="/video/video-bag.mp4"
-              title="Video player"
-              controls
-              muted
-              className="w-full h-full rounded-lg"
-            >
-              Votre navigateur ne supporte pas la lecture de vidéos.
-            </video>
+          {/* Video */}
+          <div className="flex justify-center">
+            <div className="relative group w-full max-w-sm">
+              {/* Glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-yellow-400 to-orange-500 opacity-20 group-hover:opacity-40 blur-sm transition-opacity duration-500" />
+              {/* Corner accents */}
+              <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-purple-500 z-20" />
+              <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-orange-500 z-20" />
+              {/* Label */}
+              <div className="absolute top-3 left-3 z-20 bg-stone-900/80 px-2 py-1">
+                <span className="text-white text-xs font-black uppercase tracking-widest">
+                  ▶ WATCH
+                </span>
+              </div>
+              <video
+                src="/video/394df19dfa08d1f5c710dbb48801340b_1773120504.mp4"
+                controls
+                muted
+                className="relative w-full border border-stone-300 group-hover:border-purple-500 transition-colors duration-500"
+              >
+                Votre navigateur ne supporte pas la lecture de vidéos.
+              </video>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom gradient bar */}
+      <div className="h-px bg-gradient-to-r from-transparent via-stone-300 to-transparent mt-20" />
     </section>
   );
 }

@@ -1,196 +1,96 @@
-import { Button } from "@/components/ui/button";
+import { ProductGrid } from "@/components/store/product-grid";
 import { nodePrisma as prisma } from "@/lib/prisma/node-client";
 import { Collection, TypeProduct } from "@/types/product";
-import Image from "next/image";
 import Link from "next/link";
 
-// Force le rendu dynamique côté serveur (pas de pré-rendu au build)
 export const dynamic = "force-dynamic";
-// Cache 5 minutes + revalidation en arrière-plan
 export const revalidate = 300;
 
 async function getCollections(): Promise<Collection[]> {
-  // Récupérer toutes les collections pour la navigation
-  const collections = await prisma.collection.findMany({
-    orderBy: {
-      nom: "asc",
-    },
-  });
-  return collections;
+  return prisma.collection.findMany({ orderBy: { nom: "asc" } });
 }
 
 async function getProducts(): Promise<TypeProduct[]> {
-  // Récupérer les produits de la collection actuelle
-  const products = await prisma.product.findMany({
+  return prisma.product.findMany({
     where: {
       AND: [
-        {
-          collections: {
-            some: {
-              collection: {
-                slug: "femmes",
-              },
-            },
-          },
-        },
-        {
-          collections: {
-            none: {
-              collection: {
-                slug: "chaussures",
-              },
-            },
-          },
-        },
+        { collections: { some: { collection: { slug: "femmes" } } } },
+        { collections: { none: { collection: { slug: "chaussures" } } } },
       ],
     },
     include: {
       variants: true,
-      collections: {
-        include: {
-          collection: true,
-        },
-      },
+      collections: { include: { collection: true } },
     },
   });
-  return products;
 }
 
 export default async function Page() {
   const products = await getProducts();
   const collections = await getCollections();
 
+  const filteredCollections = collections.filter(
+    (c: Collection) =>
+      c.slug !== "chaussures" &&
+      c.slug !== "hommes" &&
+      c.slug !== "femmes" &&
+      c.slug !== "nouveautes" &&
+      c.slug !== "accessoires"
+  );
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Navigation des collections */}
-      <div className="mb-8">
-        <span className="text-lg font-medium mb-4">Collections femme</span>
-        <div className="flex flex-wrap gap-2 mt-4">
-          <Link href="/categories/femmes/vetements">
-            <Button>Tout</Button>
-          </Link>
-          {collections
-            .filter(
-              (collection: Collection) =>
-                collection.slug != "chaussures" &&
-                collection.slug != "hommes" &&
-                collection.slug != "femmes" &&
-                collection.slug != "nouveautes" &&
-                collection.slug != "accessoires"
-            )
-            .map((collection: Collection) => (
+    <div className="min-h-screen bg-stone-100">
+      {/* Header */}
+      <div className="bg-stone-100 pt-12 pb-8 border-b border-stone-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span className="text-yellow-500 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
+            — FEMME
+          </span>
+          <h1 className="text-4xl md:text-5xl font-black text-stone-900 uppercase leading-none">
+            Vêtements femme
+          </h1>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <div className="border-b border-stone-200 bg-stone-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/categories/femmes/vetements"
+              className="px-4 py-1.5 text-xs font-black uppercase tracking-wider bg-stone-900 text-white"
+            >
+              Tout
+            </Link>
+            {filteredCollections.map((collection: Collection) => (
               <Link
                 key={collection.id}
                 href={`/categories/femmes/vetements/${collection.slug}`}
+                className="px-4 py-1.5 text-xs font-black uppercase tracking-wider border border-stone-300 text-stone-600 hover:border-stone-900 hover:text-stone-900 transition-colors"
               >
-                <Button variant="outline" className="cursor-pointer">
-                  {collection.nom}
-                </Button>
+                {collection.nom}
               </Link>
             ))}
-          <Link href="/categories/femmes/vetements/accessoires">
-            <Button variant="outline" className="cursor-pointer">
+            <Link
+              href="/categories/femmes/vetements/accessoires"
+              className="px-4 py-1.5 text-xs font-black uppercase tracking-wider border border-stone-300 text-stone-600 hover:border-stone-900 hover:text-stone-900 transition-colors"
+            >
               Accessoires
-            </Button>
-          </Link>
-          <Link href="/categories/femmes/vetements/nouveautes">
-            <Button variant="outline">Nouveautés</Button>
-          </Link>
+            </Link>
+            <Link
+              href="/categories/femmes/vetements/nouveautes"
+              className="px-4 py-1.5 text-xs font-black uppercase tracking-wider border border-yellow-400 text-yellow-600 hover:bg-yellow-400 hover:text-stone-900 transition-colors"
+            >
+              Nouveautés
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/*Titre de la collection actuelle */}
-      <div className="mb-8">
-        <h1 className="text-xl mb-2">Vêtements femme</h1>
+      {/* Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <ProductGrid products={products} />
       </div>
-
-      {/* Grille des produits */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products
-          .filter((product) => product.actif === true)
-          .map((product: TypeProduct) => (
-            <div key={product.id} className="group cursor-pointer">
-              <Link href={`/produits/${product.slug}`}>
-                <div className="aspect-[4/5] overflow-hidden rounded-lg bg-gray-100 mb-4 relative">
-                  {product.images &&
-                  product.images.length > 0 &&
-                  product.images[0] ? (
-                    <>
-                      <Image
-                        src={product.images[0]}
-                        alt={product.nom}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        quality={75}
-                      />
-
-                      {/* Sale Badge */}
-                      {product.prixReduit && product.prixReduit > 0 && (
-                        <div className="absolute top-4 left-4 z-10">
-                          <span className="bg-red-600 text-white px-3 py-1 text-xs font-medium">
-                            PROMO
-                          </span>
-                        </div>
-                      )}
-
-                      {/* New Badge */}
-                      {product.collections?.some(
-                        (pc) => pc.collection.nom.toLowerCase() === "nouveautés"
-                      ) && (
-                        <div
-                          className={`absolute top-4 z-10 ${
-                            product.prixReduit && product.prixReduit > 0
-                              ? "right-4"
-                              : "left-4"
-                          }`}
-                        >
-                          <span className="bg-green-600 text-white px-3 py-1 text-xs font-medium">
-                            NOUVEAU
-                          </span>
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                      <span className="text-gray-400">Aucune image</span>
-                    </div>
-                  )}
-                </div>
-              </Link>
-
-              <div className="space-y-2">
-                <h3 className="font-medium text-gray-900 group-hover:text-gray-600 transition-colors">
-                  {product.nom}
-                </h3>
-                <div className="flex items-center gap-2">
-                  {product.prixReduit && product.prixReduit > 0 ? (
-                    <>
-                      <span className="text-lg font-semibold text-gray-900">
-                        {product.prixReduit.toFixed(2)} €
-                      </span>
-                      <span className="text-sm text-gray-500 line-through">
-                        {product.prix.toFixed(2)} €
-                      </span>
-                    </>
-                  ) : (
-                    <span className="text-lg font-semibold text-gray-900">
-                      {product.prix.toFixed(2)} €
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
-
-      {products.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-500">
-            Aucun produit trouvé dans cette catégorie.
-          </p>
-        </div>
-      )}
     </div>
   );
 }

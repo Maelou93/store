@@ -78,56 +78,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* LUI */}
-          <div>
-            <div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                POUR LUI
-              </h4>
-              <ul className="space-y-3 text-sm text-gray-600">
-                <li>
-                  <Link
-                    href="/categories/hommes/vetements/hautstop"
-                    className="hover:text-gray-900"
-                  >
-                    Hauts/Tops
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/categories/hommes/vetements/manteauxvestes"
-                    className="hover:text-gray-900"
-                  >
-                    Manteaux/Vestes
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/categories/hommes/vetements/pantalons"
-                    className="hover:text-gray-900"
-                  >
-                    Pantalons
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/categories/hommes/vetements/ensembles"
-                    className="hover:text-gray-900"
-                  >
-                    Ensembles
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/categories/hommes/vetements/accessoires"
-                    className="hover:text-gray-900"
-                  >
-                    Accessoires
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
 
           {/* Support */}
           <div>
