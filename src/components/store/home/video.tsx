@@ -24,7 +24,7 @@ export default function Video() {
   }
 
   return (
-    <section className="bg-stone-100 py-20 overflow-hidden">
+    <section className="bg-stone-100 overflow-hidden">
       {/* Top gradient bar */}
       <div className="h-1 bg-gradient-to-r from-purple-500 via-yellow-400 to-orange-500 mb-20" />
 
