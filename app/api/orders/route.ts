@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!data.totalAmount || data.totalAmount <= 0) {
+    if (data.totalAmount === undefined || data.totalAmount === null || data.totalAmount < 0) {
       return NextResponse.json(
         { error: "Montant total invalide" },
         { status: 400 }
@@ -82,7 +82,14 @@ export async function POST(request: NextRequest) {
           where: { id: item.productId },
         });
 
-        if (!product || !product.quantity || product.quantity < item.quantite) {
+        if (!product) {
+          return NextResponse.json(
+            { error: `Produit introuvable: ${item.nom}` },
+            { status: 400 }
+          );
+        }
+        // Si quantity est null, on considère le stock illimité
+        if (product.quantity !== null && product.quantity < item.quantite) {
           return NextResponse.json(
             { error: `Stock insuffisant pour le produit ${item.nom}` },
             { status: 400 }
