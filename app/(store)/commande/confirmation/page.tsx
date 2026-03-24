@@ -9,7 +9,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
@@ -21,7 +20,14 @@ import {
 import { useOrder } from "@/hooks/use-order";
 import { useCartStore } from "@/store/cart-store";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IconBrandWhatsapp, IconCheck, IconLock, IconPackage, IconShoppingBag, IconTruck } from "@tabler/icons-react";
+import {
+  IconBrandWhatsapp,
+  IconCheck,
+  IconLock,
+  IconPackage,
+  IconShoppingBag,
+  IconTruck,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -35,7 +41,9 @@ const customerSchema = z
     firstName: z.string().min(1, "Le prénom est requis"),
     lastName: z.string().min(1, "Le nom est requis"),
     email: z.string().email("Email invalide").min(1, "L'email est requis"),
-    phone: z.string().min(10, "Le téléphone doit contenir au moins 10 chiffres"),
+    phone: z
+      .string()
+      .min(10, "Le téléphone doit contenir au moins 10 chiffres"),
     street: z.string().optional(),
     postalCode: z.string().optional(),
     city: z.string().optional(),
@@ -55,11 +63,23 @@ const customerSchema = z
       data.deliveryMethod === "parcel-france-home";
     if (needsAddress) {
       if (!data.street || data.street.length < 5)
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "L'adresse doit contenir au moins 5 caractères", path: ["street"] });
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "L'adresse doit contenir au moins 5 caractères",
+          path: ["street"],
+        });
       if (!data.postalCode || data.postalCode.length < 4)
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Le code postal est requis", path: ["postalCode"] });
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Le code postal est requis",
+          path: ["postalCode"],
+        });
       if (!data.city || data.city.length < 2)
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "La ville est requise", path: ["city"] });
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "La ville est requise",
+          path: ["city"],
+        });
     }
   });
 
@@ -154,8 +174,12 @@ function OrderConfirmationContent() {
   }, []);
 
   useEffect(() => {
-    const handleBeforeUnload = () => { if (orderConfirmed) clearCart(); };
-    const handlePopstate = () => { if (orderConfirmed) clearCart(); };
+    const handleBeforeUnload = () => {
+      if (orderConfirmed) clearCart();
+    };
+    const handlePopstate = () => {
+      if (orderConfirmed) clearCart();
+    };
     window.addEventListener("beforeunload", handleBeforeUnload);
     window.addEventListener("popstate", handlePopstate);
     return () => {
@@ -166,7 +190,7 @@ function OrderConfirmationContent() {
   }, [orderConfirmed, clearCart]);
 
   const selectedDelivery = DELIVERY_OPTIONS.find(
-    (o) => o.id === form.watch("deliveryMethod")
+    (o) => o.id === form.watch("deliveryMethod"),
   );
   const deliveryFee = selectedDelivery?.price ?? 0;
   const needsAddress =
@@ -183,7 +207,7 @@ function OrderConfirmationContent() {
         (item) =>
           `• ${item.nom}${item.taille ? ` (Taille: ${item.taille})` : ""}${
             item.couleur ? ` (Couleur: ${item.couleur})` : ""
-          } x${item.quantite} - ${(item.prix * item.quantite).toFixed(2)}€`
+          } x${item.quantite} - ${(item.prix * item.quantite).toFixed(2)}€`,
       )
       .join("\n");
 
@@ -191,7 +215,8 @@ function OrderConfirmationContent() {
     const fullAddress = `${formValues.street}\n${formValues.postalCode} ${formValues.city}\n${formValues.country}`;
 
     const deliveryMethodText =
-      DELIVERY_OPTIONS.find((o) => o.id === formValues.deliveryMethod)?.label ?? "";
+      DELIVERY_OPTIONS.find((o) => o.id === formValues.deliveryMethod)?.label ??
+      "";
 
     let message =
       `*Nouvelle Commande*\n\n` +
@@ -203,11 +228,13 @@ function OrderConfirmationContent() {
       `*Articles commandés:*\n${itemsList}\n\n` +
       `*Sous-total:* ${subtotal.toFixed(2)}€\n`;
 
-    if (deliveryFee > 0) message += `*Frais de livraison:* ${deliveryFee.toFixed(2)}€\n`;
+    if (deliveryFee > 0)
+      message += `*Frais de livraison:* ${deliveryFee.toFixed(2)}€\n`;
     if (appliedDiscount)
       message += `*Réduction (${appliedDiscount.discountCode}):* -${appliedDiscount.discountAmount.toFixed(2)}€\n`;
     message += `*Total:* ${total.toFixed(2)}€\n`;
-    if (deliveryMethodText) message += `\n*Mode de livraison:* ${deliveryMethodText}\n`;
+    if (deliveryMethodText)
+      message += `\n*Mode de livraison:* ${deliveryMethodText}\n`;
 
     return message;
   }, [items, orderNumber, subtotal, deliveryFee, appliedDiscount, total, form]);
@@ -236,17 +263,23 @@ function OrderConfirmationContent() {
       if (result) {
         setOrderConfirmed(true);
         localStorage.removeItem("appliedDiscount");
-        toast.success("Commande sauvegardée ! Ouverture de WhatsApp...", { position: "top-center" });
+        toast.success("Commande sauvegardée ! Ouverture de WhatsApp...", {
+          position: "top-center",
+        });
         const message = encodeURIComponent(formatOrderMessage());
         setTimeout(() => {
-          window.location.assign(`https://wa.me/+33759387212?text=${message}`);
+          window.location.assign(`https://wa.me/+33744158732?text=${message}`);
         }, 1000);
       } else {
-        toast.error("Erreur lors de la sauvegarde de la commande", { position: "top-center" });
+        toast.error("Erreur lors de la sauvegarde de la commande", {
+          position: "top-center",
+        });
       }
     } catch (err) {
       console.error("Erreur WhatsApp click:", err);
-      toast.error("Erreur lors de la sauvegarde de la commande", { position: "top-center" });
+      toast.error("Erreur lors de la sauvegarde de la commande", {
+        position: "top-center",
+      });
     } finally {
       setIsSavingOrder(false);
     }
@@ -268,7 +301,10 @@ function OrderConfirmationContent() {
       {/* Header */}
       <header className="bg-white border-b border-stone-200 px-4 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link href="/" className="text-xl font-black uppercase tracking-tight text-stone-900">
+          <Link
+            href="/"
+            className="text-xl font-black uppercase tracking-tight text-stone-900"
+          >
             IW Store
           </Link>
           <div className="flex items-center gap-1.5 text-stone-500 text-xs">
@@ -281,9 +317,16 @@ function OrderConfirmationContent() {
       {/* Breadcrumb */}
       <div className="max-w-6xl mx-auto px-4 py-4">
         <nav className="flex items-center gap-2 text-xs text-stone-400">
-          <Link href="/" className="hover:text-stone-700 transition-colors">Accueil</Link>
+          <Link href="/" className="hover:text-stone-700 transition-colors">
+            Accueil
+          </Link>
           <span>/</span>
-          <Link href="/panier" className="hover:text-stone-700 transition-colors">Panier</Link>
+          <Link
+            href="/panier"
+            className="hover:text-stone-700 transition-colors"
+          >
+            Panier
+          </Link>
           <span>/</span>
           <span className="text-stone-900 font-medium">Confirmation</span>
         </nav>
@@ -291,13 +334,13 @@ function OrderConfirmationContent() {
 
       <main className="max-w-6xl mx-auto px-4 pb-16">
         <div className="grid lg:grid-cols-[1fr_420px] gap-8 items-start">
-
           {/* ── LEFT: Form ── */}
           <div className="space-y-6">
-
             {/* Order number badge */}
             <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${orderConfirmed ? "bg-green-500" : "bg-stone-900"}`}>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${orderConfirmed ? "bg-green-500" : "bg-stone-900"}`}
+              >
                 {orderConfirmed ? (
                   <IconCheck className="w-4 h-4 text-white" />
                 ) : (
@@ -305,58 +348,106 @@ function OrderConfirmationContent() {
                 )}
               </div>
               <div>
-                <p className="text-xs text-stone-500 uppercase tracking-wider">Commande</p>
-                <p className="text-sm font-bold text-stone-900">#{orderNumber}</p>
+                <p className="text-xs text-stone-500 uppercase tracking-wider">
+                  Commande
+                </p>
+                <p className="text-sm font-bold text-stone-900">
+                  #{orderNumber}
+                </p>
               </div>
             </div>
 
             {step === "form" ? (
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmitCustomerInfo)} className="space-y-6">
-
+                <form
+                  onSubmit={form.handleSubmit(onSubmitCustomerInfo)}
+                  className="space-y-6"
+                >
                   {/* Contact */}
                   <section className="bg-white border border-stone-200 p-6 space-y-4">
                     <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900">
                       Informations de contact
                     </h2>
                     <div className="grid grid-cols-2 gap-4">
-                      <FormField control={form.control} name="lastName" render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">Nom *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Dupont" className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0" {...field} />
-                          </FormControl>
-                          <FormMessage className="text-xs" />
-                        </FormItem>
-                      )} />
-                      <FormField control={form.control} name="firstName" render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">Prénom *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Jean" className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0" {...field} />
-                          </FormControl>
-                          <FormMessage className="text-xs" />
-                        </FormItem>
-                      )} />
+                      <FormField
+                        control={form.control}
+                        name="lastName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">
+                              Nom *
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Dupont"
+                                className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage className="text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="firstName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">
+                              Prénom *
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Jean"
+                                className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage className="text-xs" />
+                          </FormItem>
+                        )}
+                      />
                     </div>
-                    <FormField control={form.control} name="email" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">Email *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="jean@example.com" type="email" className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0" {...field} />
-                        </FormControl>
-                        <FormMessage className="text-xs" />
-                      </FormItem>
-                    )} />
-                    <FormField control={form.control} name="phone" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">Téléphone *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="+33 6 12 34 56 78" type="tel" className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0" {...field} />
-                        </FormControl>
-                        <FormMessage className="text-xs" />
-                      </FormItem>
-                    )} />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">
+                            Email *
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="jean@example.com"
+                              type="email"
+                              className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs" />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">
+                            Téléphone *
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="+33 6 12 34 56 78"
+                              type="tel"
+                              className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs" />
+                        </FormItem>
+                      )}
+                    />
                   </section>
 
                   {/* Mode de livraison */}
@@ -364,35 +455,53 @@ function OrderConfirmationContent() {
                     <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900">
                       Mode de livraison
                     </h2>
-                    <FormField control={form.control} name="deliveryMethod" render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <RadioGroup onValueChange={field.onChange} value={field.value} className="space-y-3">
-                            {DELIVERY_OPTIONS.map((option) => (
-                              <label
-                                key={option.id}
-                                htmlFor={option.id}
-                                className={`flex items-center gap-4 p-4 border cursor-pointer transition-all ${
-                                  field.value === option.id
-                                    ? "border-stone-900 bg-stone-50"
-                                    : "border-stone-200 hover:border-stone-400"
-                                }`}
-                              >
-                                <RadioGroupItem value={option.id} id={option.id} className="shrink-0" />
-                                <div className="flex-1">
-                                  <span className="font-semibold text-stone-900 text-sm block">{option.label}</span>
-                                  <span className="text-xs text-stone-500 block mt-0.5">{option.description}</span>
-                                </div>
-                                <span className={`text-sm font-bold shrink-0 ${option.price === 0 ? "text-green-600" : "text-stone-900"}`}>
-                                  {option.priceLabel}
-                                </span>
-                              </label>
-                            ))}
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage className="text-xs" />
-                      </FormItem>
-                    )} />
+                    <FormField
+                      control={form.control}
+                      name="deliveryMethod"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <RadioGroup
+                              onValueChange={field.onChange}
+                              value={field.value}
+                              className="space-y-3"
+                            >
+                              {DELIVERY_OPTIONS.map((option) => (
+                                <label
+                                  key={option.id}
+                                  htmlFor={option.id}
+                                  className={`flex items-center gap-4 p-4 border cursor-pointer transition-all ${
+                                    field.value === option.id
+                                      ? "border-stone-900 bg-stone-50"
+                                      : "border-stone-200 hover:border-stone-400"
+                                  }`}
+                                >
+                                  <RadioGroupItem
+                                    value={option.id}
+                                    id={option.id}
+                                    className="shrink-0"
+                                  />
+                                  <div className="flex-1">
+                                    <span className="font-semibold text-stone-900 text-sm block">
+                                      {option.label}
+                                    </span>
+                                    <span className="text-xs text-stone-500 block mt-0.5">
+                                      {option.description}
+                                    </span>
+                                  </div>
+                                  <span
+                                    className={`text-sm font-bold shrink-0 ${option.price === 0 ? "text-green-600" : "text-stone-900"}`}
+                                  >
+                                    {option.priceLabel}
+                                  </span>
+                                </label>
+                              ))}
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage className="text-xs" />
+                        </FormItem>
+                      )}
+                    />
                   </section>
 
                   {/* Adresse — visible uniquement pour Point relais / Domicile */}
@@ -401,58 +510,101 @@ function OrderConfirmationContent() {
                       <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900">
                         Adresse de livraison
                       </h2>
-                      <FormField control={form.control} name="street" render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">Adresse *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="123 Rue de la Paix" className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0" {...field} />
-                          </FormControl>
-                          <FormMessage className="text-xs" />
-                        </FormItem>
-                      )} />
+                      <FormField
+                        control={form.control}
+                        name="street"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">
+                              Adresse *
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="123 Rue de la Paix"
+                                className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage className="text-xs" />
+                          </FormItem>
+                        )}
+                      />
                       <div className="grid grid-cols-2 gap-4">
-                        <FormField control={form.control} name="postalCode" render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">Code postal *</FormLabel>
-                            <FormControl>
-                              <Input placeholder="75001" className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0" {...field} />
-                            </FormControl>
-                            <FormMessage className="text-xs" />
-                          </FormItem>
-                        )} />
-                        <FormField control={form.control} name="city" render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">Ville *</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Paris" className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0" {...field} />
-                            </FormControl>
-                            <FormMessage className="text-xs" />
-                          </FormItem>
-                        )} />
+                        <FormField
+                          control={form.control}
+                          name="postalCode"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">
+                                Code postal *
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  placeholder="75001"
+                                  className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage className="text-xs" />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="city"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">
+                                Ville *
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  placeholder="Paris"
+                                  className="h-11 rounded-none border-stone-300 focus:border-stone-900 focus:ring-0"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage className="text-xs" />
+                            </FormItem>
+                          )}
+                        />
                       </div>
-                      <FormField control={form.control} name="country" render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">Pays *</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger className="h-11 rounded-none border-stone-300 focus:ring-0">
-                                <SelectValue placeholder="Sélectionner un pays" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="France">France</SelectItem>
-                              <SelectItem value="Belgique">Belgique</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage className="text-xs" />
-                        </FormItem>
-                      )} />
+                      <FormField
+                        control={form.control}
+                        name="country"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs text-stone-600 uppercase tracking-wider">
+                              Pays *
+                            </FormLabel>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
+                              <FormControl>
+                                <SelectTrigger className="h-11 rounded-none border-stone-300 focus:ring-0">
+                                  <SelectValue placeholder="Sélectionner un pays" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="France">France</SelectItem>
+                                <SelectItem value="Belgique">
+                                  Belgique
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage className="text-xs" />
+                          </FormItem>
+                        )}
+                      />
                     </section>
                   )}
 
                   <button
                     type="submit"
-                    disabled={!form.formState.isValid || !form.watch("deliveryMethod")}
+                    disabled={
+                      !form.formState.isValid || !form.watch("deliveryMethod")
+                    }
                     className="w-full h-12 bg-stone-900 text-white text-sm font-bold uppercase tracking-wider disabled:opacity-40 disabled:cursor-not-allowed hover:bg-stone-800 transition-colors"
                   >
                     Confirmer mes informations →
@@ -479,26 +631,47 @@ function OrderConfirmationContent() {
                   </div>
                   <div className="grid grid-cols-2 gap-y-3 text-sm">
                     <div>
-                      <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">Nom</p>
-                      <p className="text-stone-900 font-medium">{form.getValues("firstName")} {form.getValues("lastName")}</p>
+                      <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
+                        Nom
+                      </p>
+                      <p className="text-stone-900 font-medium">
+                        {form.getValues("firstName")}{" "}
+                        {form.getValues("lastName")}
+                      </p>
                     </div>
                     <div>
-                      <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">Email</p>
-                      <p className="text-stone-900 font-medium">{form.getValues("email")}</p>
+                      <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
+                        Email
+                      </p>
+                      <p className="text-stone-900 font-medium">
+                        {form.getValues("email")}
+                      </p>
                     </div>
                     <div>
-                      <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">Téléphone</p>
-                      <p className="text-stone-900 font-medium">{form.getValues("phone")}</p>
+                      <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
+                        Téléphone
+                      </p>
+                      <p className="text-stone-900 font-medium">
+                        {form.getValues("phone")}
+                      </p>
                     </div>
                     <div>
-                      <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">Mode de livraison</p>
-                      <p className="text-stone-900 font-medium">{selectedDelivery?.label}</p>
+                      <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
+                        Mode de livraison
+                      </p>
+                      <p className="text-stone-900 font-medium">
+                        {selectedDelivery?.label}
+                      </p>
                     </div>
                     {needsAddress && (
                       <div className="col-span-2">
-                        <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">Adresse</p>
+                        <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
+                          Adresse
+                        </p>
                         <p className="text-stone-900 font-medium">
-                          {form.getValues("street")}, {form.getValues("postalCode")} {form.getValues("city")}, {form.getValues("country")}
+                          {form.getValues("street")},{" "}
+                          {form.getValues("postalCode")}{" "}
+                          {form.getValues("city")}, {form.getValues("country")}
                         </p>
                       </div>
                     )}
@@ -511,7 +684,9 @@ function OrderConfirmationContent() {
                     Finaliser la commande
                   </h2>
                   <p className="text-sm text-stone-500">
-                    Cliquez sur le bouton ci-dessous pour envoyer votre commande via WhatsApp. Votre récapitulatif sera automatiquement pré-rempli.
+                    Cliquez sur le bouton ci-dessous pour envoyer votre commande
+                    via WhatsApp. Votre récapitulatif sera automatiquement
+                    pré-rempli.
                   </p>
                   <button
                     type="button"
@@ -520,19 +695,24 @@ function OrderConfirmationContent() {
                     className="w-full h-12 bg-green-600 hover:bg-green-700 text-white text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                   >
                     <IconBrandWhatsapp className="w-5 h-5" />
-                    {isSavingOrder ? "Sauvegarde en cours..." : "Finaliser avec WhatsApp"}
+                    {isSavingOrder
+                      ? "Sauvegarde en cours..."
+                      : "Finaliser avec WhatsApp"}
                   </button>
 
                   {/* Backup link */}
                   <p className="text-center text-xs text-stone-400">
                     Si le bouton ne fonctionne pas :{" "}
                     <a
-                      href={`https://wa.me/+33759387212?text=${encodeURIComponent(formatOrderMessage())}`}
+                      href={`https://wa.me/+33744158732?text=${encodeURIComponent(formatOrderMessage())}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-600 underline hover:text-green-800"
                       onClick={(e) => {
-                        if (isSavingOrder) { e.preventDefault(); return; }
+                        if (isSavingOrder) {
+                          e.preventDefault();
+                          return;
+                        }
                         handleWhatsAppClick();
                       }}
                     >
@@ -541,7 +721,10 @@ function OrderConfirmationContent() {
                   </p>
                 </section>
 
-                <Link href="/" className="block text-center text-xs text-stone-400 hover:text-stone-700 transition-colors">
+                <Link
+                  href="/"
+                  className="block text-center text-xs text-stone-400 hover:text-stone-700 transition-colors"
+                >
                   ← Retourner à l&apos;accueil
                 </Link>
               </div>
@@ -566,7 +749,10 @@ function OrderConfirmationContent() {
                         ? item.prixReduit
                         : item.prix;
                     return (
-                      <div key={item.id} className="px-6 py-4 flex items-center gap-4">
+                      <div
+                        key={item.id}
+                        className="px-6 py-4 flex items-center gap-4"
+                      >
                         <div className="relative shrink-0">
                           <div className="w-16 h-16 bg-stone-100 relative">
                             <Image
@@ -581,13 +767,19 @@ function OrderConfirmationContent() {
                           </span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-stone-900 truncate">{item.nom}</p>
+                          <p className="text-sm font-medium text-stone-900 truncate">
+                            {item.nom}
+                          </p>
                           <div className="flex gap-2 mt-0.5">
                             {item.taille && (
-                              <span className="text-xs text-stone-400">{item.taille}</span>
+                              <span className="text-xs text-stone-400">
+                                {item.taille}
+                              </span>
                             )}
                             {item.couleur && (
-                              <span className="text-xs text-stone-400">{item.couleur}</span>
+                              <span className="text-xs text-stone-400">
+                                {item.couleur}
+                              </span>
                             )}
                           </div>
                         </div>
@@ -613,12 +805,17 @@ function OrderConfirmationContent() {
                 <div className="flex justify-between text-sm text-stone-600">
                   <span>Livraison</span>
                   <span>
-                    {selectedDelivery
-                      ? selectedDelivery.price === 0
-                        ? <span className="text-green-600 font-medium">Gratuit</span>
-                        : `${selectedDelivery.price.toFixed(2)} €`
-                      : <span className="text-stone-400">—</span>
-                    }
+                    {selectedDelivery ? (
+                      selectedDelivery.price === 0 ? (
+                        <span className="text-green-600 font-medium">
+                          Gratuit
+                        </span>
+                      ) : (
+                        `${selectedDelivery.price.toFixed(2)} €`
+                      )
+                    ) : (
+                      <span className="text-stone-400">—</span>
+                    )}
                   </span>
                 </div>
                 {appliedDiscount && (
