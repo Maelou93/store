@@ -268,7 +268,7 @@ function OrderConfirmationContent() {
         });
         const message = encodeURIComponent(formatOrderMessage());
         setTimeout(() => {
-          window.location.assign(`https://wa.me/+33744158732?text=${message}`);
+          window.location.assign(`https://wa.me/+33759387212?text=${message}`);
         }, 1000);
       } else {
         toast.error("Erreur lors de la sauvegarde de la commande", {
@@ -704,7 +704,7 @@ function OrderConfirmationContent() {
                   <p className="text-center text-xs text-stone-400">
                     Si le bouton ne fonctionne pas :{" "}
                     <a
-                      href={`https://wa.me/+33744158732?text=${encodeURIComponent(formatOrderMessage())}`}
+                      href={`https://wa.me/+33759387212?text=${encodeURIComponent(formatOrderMessage())}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-600 underline hover:text-green-800"
