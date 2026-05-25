@@ -1,103 +1,75 @@
 "use client";
 
-import { useHomePageConfig } from "@/hooks/useHomePageConfig";
 import { ArrowRight } from "lucide-react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 type Category = {
   title: string;
   subtitle: string;
-  image: StaticImageData | string;
+  image: string;
   link: string;
   buttonText: string;
-  featured?: boolean;
 };
 
 const accentColors = [
   "border-[#493A2E] group-hover:bg-[#493A2E]",
   "border-[#6B5848] group-hover:bg-[#6B5848]",
   "border-[#88755C] group-hover:bg-[#88755C]",
-  "border-[#88755C] group-hover:bg-[#88755C]",
+  "border-[#493A2E] group-hover:bg-[#493A2E]",
 ];
 
 const tagColors = [
   "bg-[#493A2E] text-white",
   "bg-[#6B5848] text-white",
   "bg-[#88755C] text-white",
-  "bg-[#88755C] text-white",
+  "bg-[#493A2E] text-white",
 ];
 
+const EXCLUDED_NAMES = ["vêtements homme", "vetements homme", "chaussures homme"];
+
 export default function CategoriesSection() {
-  const { config, isLoading } = useHomePageConfig();
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const categories = useMemo<Category[]>(() => {
-    const newCategories: Category[] = [];
+  useEffect(() => {
+    fetch("/api/site-config")
+      .then((r) => r.json())
+      .then((data: { key: string; value: string }[]) => {
+        const configMap: Record<string, string> = {};
+        data.forEach((c) => { configMap[c.key] = c.value; });
 
-    const categoryData = [
-      {
-        title: config.category_1_name,
-        subtitle: config.category_1_subtitle,
-        buttonText: config.category_1_button_text,
-        link: config.category_1_link,
-        image: config.category_1_image,
-      },
-      {
-        title: config.category_2_name,
-        subtitle: config.category_2_subtitle,
-        buttonText: config.category_2_button_text,
-        link: config.category_2_link,
-        image: config.category_2_image,
-      },
-      {
-        title: config.category_3_name,
-        subtitle: config.category_3_subtitle,
-        buttonText: config.category_3_button_text,
-        link: config.category_3_link,
-        image: config.category_3_image,
-      },
-      {
-        title: config.category_4_name,
-        subtitle: config.category_4_subtitle,
-        buttonText: config.category_4_button_text,
-        link: config.category_4_link,
-        image: config.category_4_image,
-      },
-      {
-        title: config.category_5_name,
-        subtitle: config.category_5_subtitle,
-        buttonText: config.category_5_button_text,
-        link: config.category_5_link,
-        image: config.category_5_image,
-      },
-    ];
+        const result: Category[] = [];
+        for (let i = 1; i <= 10; i++) {
+          const raw = configMap[`category_${i}`];
+          if (!raw) continue;
+          try {
+            const json = JSON.parse(raw);
+            const title = json.nom || "";
+            const image = json.image || "";
+            const link = json.lien || "";
+            if (!title || !image) continue;
+            if (EXCLUDED_NAMES.includes(title.toLowerCase())) continue;
+            result.push({ title, image, link, subtitle: "", buttonText: "Découvrir" });
+          } catch {}
+        }
 
-    categoryData.forEach((category, index) => {
-      if (category.title && !category.title.toLowerCase().includes("vêtements homme") && !category.title.toLowerCase().includes("vetements homme")) {
-        newCategories.push({
-          title: category.title,
-          subtitle: category.subtitle || "",
-          buttonText: category.buttonText || "Explorer",
-          link: category.link || "",
-          image: category.image || "",
-          featured: index === 0,
-        });
-      }
-    });
-
-    return newCategories;
-  }, [config]);
+        setCategories(result);
+      })
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  }, []);
 
   if (isLoading) {
     return (
       <section className="py-16 bg-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse">
-            <div className="h-6 bg-zinc-800 rounded w-32 mb-12"></div>
+            <div className="h-6 bg-stone-300 rounded w-32 mb-12"></div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="h-96 bg-zinc-800 rounded"></div>
+                <div key={i} className="h-96 bg-stone-300 rounded"></div>
               ))}
             </div>
           </div>
@@ -119,9 +91,6 @@ export default function CategoriesSection() {
               Collections
             </h2>
           </div>
-          <p className="hidden md:block text-stone-500 text-sm max-w-xs text-right">
-            {config.categories_section_description}
-          </p>
         </div>
 
         {/* Grid */}
@@ -132,23 +101,14 @@ export default function CategoriesSection() {
               href={`/${category.link}`}
               className="group relative overflow-hidden block"
             >
-              {/* Image */}
               <div className="relative h-72 md:h-96 overflow-hidden bg-stone-200">
                 <Image
-                  src={typeof category.image === "string" ? category.image : category.image}
+                  src={category.image}
                   alt={category.title}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                {/* Dark overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
-
-                {/* Featured badge */}
-                {category.featured && (
-                  <div className={`absolute top-4 left-4 z-20 px-3 py-1 text-xs font-black uppercase tracking-wider text-[#6B5848] ${tagColors[0]}`}>
-                    POPULAIRE
-                  </div>
-                )}
 
                 {/* Color accent tag */}
                 <div className={`absolute top-4 right-4 z-20 w-3 h-8 ${tagColors[index % tagColors.length]}`} />
@@ -158,7 +118,7 @@ export default function CategoriesSection() {
                   <h3 className="text-white text-xl font-black uppercase tracking-tight mb-1">
                     {category.title}
                   </h3>
-                  <p className="text-stone-300 text-xs mb-4">{category.subtitle}</p>
+
                   <div className={`inline-flex items-center gap-2 border-b-2 px-3 py-2 text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 ${accentColors[index % accentColors.length]}`}>
                     <span>{category.buttonText}</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
