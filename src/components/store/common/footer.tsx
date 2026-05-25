@@ -69,7 +69,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/categories/femmes/vetements/accessoires"
+                  href="/categories/femmes/accessoires"
                   className="hover:text-gray-900"
                 >
                   Accessoires
@@ -95,7 +95,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/categories/femmes/vetements/accessoires"
+                  href="/categories/femmes/accessoires"
                   className="hover:text-gray-900"
                 >
                   Accessoires

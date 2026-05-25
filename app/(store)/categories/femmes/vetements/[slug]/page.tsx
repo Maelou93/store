@@ -80,7 +80,7 @@ export default async function Page(props: {
               </Link>
             ))}
             <Link
-              href="/categories/femmes/vetements/accessoires"
+              href="/categories/femmes/accessoires"
               className={`px-4 py-1.5 text-xs font-black uppercase tracking-wider transition-colors ${
                 params.slug === "accessoires"
                   ? "bg-stone-900 text-white"

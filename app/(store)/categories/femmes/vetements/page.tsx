@@ -72,7 +72,7 @@ export default async function Page() {
               </Link>
             ))}
             <Link
-              href="/categories/femmes/vetements/accessoires"
+              href="/categories/femmes/accessoires"
               className="px-4 py-1.5 text-xs font-black uppercase tracking-wider border border-stone-300 text-stone-600 hover:border-stone-900 hover:text-[#6B5848] transition-colors"
             >
               Accessoires

@@ -35,7 +35,7 @@ const menuItems: MenuItem[] = [
     titre: "Chaussures",
     children: [
       { titre: "Chaussures femme", link: "/categories/femmes/chaussures" },
-      { titre: "Accessoires", link: "/categories/femmes/vetements/accessoires" },
+      { titre: "Accessoires", link: "/categories/femmes/accessoires" },
     ],
   },
   {
@@ -44,7 +44,7 @@ const menuItems: MenuItem[] = [
   },
   {
     titre: "Accessoires",
-    link: "/categories/femmes/vetements/accessoires",
+    link: "/categories/femmes/accessoires",
   },
 ];
 
