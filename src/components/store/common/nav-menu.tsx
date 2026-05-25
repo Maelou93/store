@@ -55,7 +55,7 @@ export function NavMenu() {
         {menuItems.map((menu) =>
           "children" in menu ? (
             <NavigationMenuItem key={menu.titre}>
-              <NavigationMenuTrigger className="text-sm font-medium">
+              <NavigationMenuTrigger className="text-sm font-medium text-[#6B5848]">
                 {menu.titre.toUpperCase()}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -65,7 +65,7 @@ export function NavMenu() {
                       <NavigationMenuLink asChild>
                         <Link
                           href={child.link}
-                          className="block px-3 py-2 text-xs font-semibold uppercase tracking-wide hover:bg-stone-100 rounded transition-colors"
+                          className="block px-3 py-2 text-xs font-semibold uppercase tracking-wide text-[#6B5848] hover:bg-stone-100 rounded transition-colors"
                         >
                           {child.titre}
                         </Link>
@@ -79,7 +79,7 @@ export function NavMenu() {
             <NavigationMenuItem key={menu.titre}>
               <NavigationMenuLink
                 asChild
-                className={navigationMenuTriggerStyle()}
+                className={`${navigationMenuTriggerStyle()} text-[#6B5848]`}
               >
                 <Link href={menu.link}>{menu.titre.toUpperCase()}</Link>
               </NavigationMenuLink>

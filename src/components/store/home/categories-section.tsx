@@ -16,17 +16,17 @@ type Category = {
 };
 
 const accentColors = [
-  "border-amber-700 group-hover:bg-amber-700",
-  "border-amber-600 group-hover:bg-amber-600",
-  "border-amber-500 group-hover:bg-amber-500",
-  "border-amber-400 group-hover:bg-amber-400",
+  "border-[#493A2E] group-hover:bg-[#493A2E]",
+  "border-[#6B5848] group-hover:bg-[#6B5848]",
+  "border-[#88755C] group-hover:bg-[#88755C]",
+  "border-[#88755C] group-hover:bg-[#88755C]",
 ];
 
 const tagColors = [
-  "bg-amber-700 text-white",
-  "bg-amber-600 text-white",
-  "bg-amber-500 text-white",
-  "bg-amber-400 text-white",
+  "bg-[#493A2E] text-white",
+  "bg-[#6B5848] text-white",
+  "bg-[#88755C] text-white",
+  "bg-[#88755C] text-white",
 ];
 
 export default function CategoriesSection() {
@@ -112,10 +112,10 @@ export default function CategoriesSection() {
         {/* Header */}
         <div className="flex items-end justify-between mb-12">
           <div>
-            <span className="text-amber-700 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
+            <span className="text-[#6B5848] text-xs font-bold tracking-[0.3em] uppercase block mb-2">
               — DROP
             </span>
-            <h2 className="text-4xl md:text-5xl font-black text-stone-900 uppercase leading-none">
+            <h2 className="text-4xl md:text-5xl font-black text-[#6B5848] uppercase leading-none">
               Collections
             </h2>
           </div>
@@ -145,7 +145,7 @@ export default function CategoriesSection() {
 
                 {/* Featured badge */}
                 {category.featured && (
-                  <div className={`absolute top-4 left-4 z-20 px-3 py-1 text-xs font-black uppercase tracking-wider text-stone-800 ${tagColors[0]}`}>
+                  <div className={`absolute top-4 left-4 z-20 px-3 py-1 text-xs font-black uppercase tracking-wider text-[#6B5848] ${tagColors[0]}`}>
                     POPULAIRE
                   </div>
                 )}

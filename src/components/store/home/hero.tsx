@@ -36,8 +36,8 @@ export default function Hero() {
             <div className="max-w-2xl space-y-6">
               {/* Tag */}
               <div className="inline-flex items-center gap-2">
-                <span className="w-8 h-0.5 bg-amber-700" />
-                <span className="text-amber-600 text-xs font-bold tracking-[0.3em] uppercase">
+                <span className="w-8 h-0.5 bg-[#493A2E]" />
+                <span className="text-[#6B5848] text-xs font-bold tracking-[0.3em] uppercase">
                   {config.homepage_hero_subtitle}
                 </span>
               </div>
@@ -53,7 +53,7 @@ export default function Hero() {
 
         {/* Side text decoration */}
         <div className="absolute right-6 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-3 z-10">
-          <div className="w-0.5 h-20 bg-gradient-to-b from-transparent to-amber-700" />
+          <div className="w-0.5 h-20 bg-gradient-to-b from-transparent to-[#493A2E]" />
           <span className="text-zinc-500 text-xs font-bold tracking-[0.4em] uppercase [writing-mode:vertical-rl]">
             NEW COLLECTION
           </span>

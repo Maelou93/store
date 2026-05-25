@@ -28,10 +28,10 @@ export default async function Page() {
       {/* Header */}
       <div className="bg-stone-100 pt-12 pb-8 border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-amber-700 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
+          <span className="text-[#6B5848] text-xs font-bold tracking-[0.3em] uppercase block mb-2">
             — HOMME
           </span>
-          <h1 className="text-4xl md:text-5xl font-black text-stone-900 uppercase leading-none">
+          <h1 className="text-4xl md:text-5xl font-black text-[#6B5848] uppercase leading-none">
             Chaussures homme
           </h1>
         </div>

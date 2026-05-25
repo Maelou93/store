@@ -72,7 +72,7 @@ export const NavBarMobile = () => {
           >
             <Link
               href="/"
-              className="text-lg font-semibold text-gray-900 hover:text-gray-600"
+              className="text-lg font-semibold text-[#6B5848] hover:text-[#493A2E]"
             >
               Accueil
             </Link>
@@ -85,7 +85,7 @@ export const NavBarMobile = () => {
                 <li key={menu.titre} onClick={() => setOpenMenu(false)}>
                   <Link
                     href={menu.link}
-                    className="font-semibold text-gray-900 uppercase tracking-wide"
+                    className="font-semibold text-[#6B5848] uppercase tracking-wide"
                   >
                     {menu.titre}
                   </Link>
@@ -101,7 +101,7 @@ export const NavBarMobile = () => {
           >
             <Link
               href="/wishlist"
-              className="text-lg font-semibold text-gray-900 hover:text-gray-600"
+              className="text-lg font-semibold text-[#6B5848] hover:text-[#493A2E]"
             >
               Mes favoris
             </Link>

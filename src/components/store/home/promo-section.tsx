@@ -83,16 +83,16 @@ export default function PromoSection() {
           </div>
 
           {/* Top accent bar */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#493A2E] via-[#6B5848] to-[#88755C]" />
 
           <div className="relative px-8 md:px-16 py-12 flex flex-col items-center text-center gap-8">
             {/* Label */}
-            <span className="text-amber-700 text-xs font-black tracking-[0.4em] uppercase">
+            <span className="text-[#6B5848] text-xs font-black tracking-[0.4em] uppercase">
               — OFFRE LIMITÉE
             </span>
 
             {/* Title */}
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 uppercase leading-tight max-w-lg">
+            <h2 className="text-3xl md:text-4xl font-black text-[#6B5848] uppercase leading-tight max-w-lg">
               {config.promo_discount_text}
             </h2>
 
@@ -101,7 +101,7 @@ export default function PromoSection() {
               {timeBlocks.map(({ value, label }) => (
                 <div key={label} className="flex flex-col items-center">
                   <div className="bg-white border border-stone-300 w-16 md:w-20 h-16 md:h-20 flex items-center justify-center">
-                    <span className="text-stone-900 text-2xl md:text-3xl font-black tabular-nums">
+                    <span className="text-[#6B5848] text-2xl md:text-3xl font-black tabular-nums">
                       {value.toString().padStart(2, "0")}
                     </span>
                   </div>
@@ -118,8 +118,8 @@ export default function PromoSection() {
                 <span className="text-stone-500 text-sm uppercase tracking-wider">
                   Ton code :
                 </span>
-                <div className="border-2 border-amber-700 px-8 py-3">
-                  <span className="text-amber-700 font-black text-2xl tracking-[0.3em] uppercase font-mono">
+                <div className="border-2 border-[#493A2E] px-8 py-3">
+                  <span className="text-[#6B5848] font-black text-2xl tracking-[0.3em] uppercase font-mono">
                     {config.selectedDiscount.code}
                   </span>
                 </div>

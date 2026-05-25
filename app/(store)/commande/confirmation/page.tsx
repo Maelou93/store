@@ -296,14 +296,14 @@ function OrderConfirmationContent() {
   return (
     <div className="min-h-screen bg-stone-50">
       {/* Top accent bar */}
-      <div className="h-1 bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400" />
+      <div className="h-1 bg-gradient-to-r from-[#493A2E] via-[#6B5848] to-[#88755C]" />
 
       {/* Header */}
       <header className="bg-white border-b border-stone-200 px-4 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link
             href="/"
-            className="text-xl font-black uppercase tracking-tight text-stone-900"
+            className="text-xl font-black uppercase tracking-tight text-[#6B5848]"
           >
             IW Store
           </Link>
@@ -328,7 +328,7 @@ function OrderConfirmationContent() {
             Panier
           </Link>
           <span>/</span>
-          <span className="text-stone-900 font-medium">Confirmation</span>
+          <span className="text-[#6B5848] font-medium">Confirmation</span>
         </nav>
       </div>
 
@@ -351,7 +351,7 @@ function OrderConfirmationContent() {
                 <p className="text-xs text-stone-500 uppercase tracking-wider">
                   Commande
                 </p>
-                <p className="text-sm font-bold text-stone-900">
+                <p className="text-sm font-bold text-[#6B5848]">
                   #{orderNumber}
                 </p>
               </div>
@@ -365,7 +365,7 @@ function OrderConfirmationContent() {
                 >
                   {/* Contact */}
                   <section className="bg-white border border-stone-200 p-6 space-y-4">
-                    <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900">
+                    <h2 className="text-sm font-bold uppercase tracking-wider text-[#6B5848]">
                       Informations de contact
                     </h2>
                     <div className="grid grid-cols-2 gap-4">
@@ -452,7 +452,7 @@ function OrderConfirmationContent() {
 
                   {/* Mode de livraison */}
                   <section className="bg-white border border-stone-200 p-6 space-y-4">
-                    <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900">
+                    <h2 className="text-sm font-bold uppercase tracking-wider text-[#6B5848]">
                       Mode de livraison
                     </h2>
                     <FormField
@@ -482,7 +482,7 @@ function OrderConfirmationContent() {
                                     className="shrink-0"
                                   />
                                   <div className="flex-1">
-                                    <span className="font-semibold text-stone-900 text-sm block">
+                                    <span className="font-semibold text-[#6B5848] text-sm block">
                                       {option.label}
                                     </span>
                                     <span className="text-xs text-stone-500 block mt-0.5">
@@ -490,7 +490,7 @@ function OrderConfirmationContent() {
                                     </span>
                                   </div>
                                   <span
-                                    className={`text-sm font-bold shrink-0 ${option.price === 0 ? "text-green-600" : "text-stone-900"}`}
+                                    className={`text-sm font-bold shrink-0 ${option.price === 0 ? "text-green-600" : "text-[#6B5848]"}`}
                                   >
                                     {option.priceLabel}
                                   </span>
@@ -507,7 +507,7 @@ function OrderConfirmationContent() {
                   {/* Adresse — visible uniquement pour Point relais / Domicile */}
                   {needsAddress && (
                     <section className="bg-white border border-stone-200 p-6 space-y-4">
-                      <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900">
+                      <h2 className="text-sm font-bold uppercase tracking-wider text-[#6B5848]">
                         Adresse de livraison
                       </h2>
                       <FormField
@@ -617,14 +617,14 @@ function OrderConfirmationContent() {
                 {/* Recap adresse */}
                 <section className="bg-white border border-stone-200 p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900 flex items-center gap-2">
+                    <h2 className="text-sm font-bold uppercase tracking-wider text-[#6B5848] flex items-center gap-2">
                       <IconCheck className="w-4 h-4 text-green-600" />
                       Informations confirmées
                     </h2>
                     <button
                       type="button"
                       onClick={() => setStep("form")}
-                      className="text-xs text-stone-500 underline hover:text-stone-900 transition-colors"
+                      className="text-xs text-stone-500 underline hover:text-[#6B5848] transition-colors"
                     >
                       Modifier
                     </button>
@@ -634,7 +634,7 @@ function OrderConfirmationContent() {
                       <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
                         Nom
                       </p>
-                      <p className="text-stone-900 font-medium">
+                      <p className="text-[#6B5848] font-medium">
                         {form.getValues("firstName")}{" "}
                         {form.getValues("lastName")}
                       </p>
@@ -643,7 +643,7 @@ function OrderConfirmationContent() {
                       <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
                         Email
                       </p>
-                      <p className="text-stone-900 font-medium">
+                      <p className="text-[#6B5848] font-medium">
                         {form.getValues("email")}
                       </p>
                     </div>
@@ -651,7 +651,7 @@ function OrderConfirmationContent() {
                       <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
                         Téléphone
                       </p>
-                      <p className="text-stone-900 font-medium">
+                      <p className="text-[#6B5848] font-medium">
                         {form.getValues("phone")}
                       </p>
                     </div>
@@ -659,7 +659,7 @@ function OrderConfirmationContent() {
                       <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
                         Mode de livraison
                       </p>
-                      <p className="text-stone-900 font-medium">
+                      <p className="text-[#6B5848] font-medium">
                         {selectedDelivery?.label}
                       </p>
                     </div>
@@ -668,7 +668,7 @@ function OrderConfirmationContent() {
                         <p className="text-xs text-stone-400 uppercase tracking-wider mb-0.5">
                           Adresse
                         </p>
-                        <p className="text-stone-900 font-medium">
+                        <p className="text-[#6B5848] font-medium">
                           {form.getValues("street")},{" "}
                           {form.getValues("postalCode")}{" "}
                           {form.getValues("city")}, {form.getValues("country")}
@@ -680,7 +680,7 @@ function OrderConfirmationContent() {
 
                 {/* WhatsApp CTA */}
                 <section className="bg-white border border-stone-200 p-6 space-y-4">
-                  <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900">
+                  <h2 className="text-sm font-bold uppercase tracking-wider text-[#6B5848]">
                     Finaliser la commande
                   </h2>
                   <p className="text-sm text-stone-500">
@@ -735,7 +735,7 @@ function OrderConfirmationContent() {
           <aside className="lg:sticky lg:top-6 space-y-4">
             <div className="bg-white border border-stone-200">
               <div className="px-6 py-4 border-b border-stone-100">
-                <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900">
+                <h2 className="text-sm font-bold uppercase tracking-wider text-[#6B5848]">
                   Récapitulatif
                 </h2>
               </div>
@@ -767,7 +767,7 @@ function OrderConfirmationContent() {
                           </span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-stone-900 truncate">
+                          <p className="text-sm font-medium text-[#6B5848] truncate">
                             {item.nom}
                           </p>
                           <div className="flex gap-2 mt-0.5">
@@ -783,7 +783,7 @@ function OrderConfirmationContent() {
                             )}
                           </div>
                         </div>
-                        <p className="text-sm font-semibold text-stone-900 shrink-0">
+                        <p className="text-sm font-semibold text-[#6B5848] shrink-0">
                           {(unitPrice * item.quantite).toFixed(2)} €
                         </p>
                       </div>
@@ -824,7 +824,7 @@ function OrderConfirmationContent() {
                     <span>-{appliedDiscount.discountAmount.toFixed(2)} €</span>
                   </div>
                 )}
-                <div className="flex justify-between text-base font-bold text-stone-900 pt-2 border-t border-stone-200">
+                <div className="flex justify-between text-base font-bold text-[#6B5848] pt-2 border-t border-stone-200">
                   <span>Total</span>
                   <span>{total.toFixed(2)} €</span>
                 </div>

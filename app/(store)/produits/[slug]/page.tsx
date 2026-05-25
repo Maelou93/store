@@ -167,7 +167,7 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-stone-100">
       {/* Top accent bar */}
-      <div className="h-1 bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400" />
+      <div className="h-1 bg-gradient-to-r from-[#493A2E] via-[#6B5848] to-[#88755C]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -189,14 +189,14 @@ export default function Page() {
                       {index === 0 && (
                         <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
                           {product.prixReduit && product.prixReduit > 0 && (
-                            <span className="bg-amber-700 text-white px-2 py-0.5 text-xs font-black uppercase">
+                            <span className="bg-[#493A2E] text-white px-2 py-0.5 text-xs font-black uppercase">
                               PROMO
                             </span>
                           )}
                           {product.collections?.some(
                             (pc) => pc.collection.nom.toLowerCase() === "nouveautés"
                           ) && (
-                            <span className="bg-amber-500 text-white px-2 py-0.5 text-xs font-black uppercase">
+                            <span className="bg-[#88755C] text-white px-2 py-0.5 text-xs font-black uppercase">
                               NEW
                             </span>
                           )}
@@ -234,10 +234,10 @@ export default function Page() {
             <div>
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <span className="text-amber-700 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
+                  <span className="text-[#6B5848] text-xs font-bold tracking-[0.3em] uppercase block mb-2">
                     — {product.collections[0]?.collection.nom || "PRODUIT"}
                   </span>
-                  <h1 className="text-3xl md:text-4xl font-black text-stone-900 uppercase leading-none">
+                  <h1 className="text-3xl md:text-4xl font-black text-[#6B5848] uppercase leading-none">
                     {product.nom}
                   </h1>
                 </div>
@@ -246,12 +246,12 @@ export default function Page() {
                   type="button"
                   onClick={handleWishlistToggle}
                   aria-label="Ajouter aux favoris"
-                  className="ml-4 w-10 h-10 flex items-center justify-center border border-stone-300 hover:border-amber-700 hover:text-amber-700 text-stone-600 transition-all duration-300"
+                  className="ml-4 w-10 h-10 flex items-center justify-center border border-stone-300 hover:border-[#493A2E] hover:text-[#6B5848] text-stone-600 transition-all duration-300"
                 >
                   <IconHeart
                     className={`h-5 w-5 ${
                       product && hasHydrated && isInWishlist(product.id)
-                        ? "text-amber-700 fill-current"
+                        ? "text-[#6B5848] fill-current"
                         : ""
                     }`}
                   />
@@ -274,18 +274,18 @@ export default function Page() {
               <div className="flex items-center gap-4">
                 {product.prixReduit && product.prixReduit > 0 ? (
                   <>
-                    <span className="text-3xl font-black text-amber-700">
+                    <span className="text-3xl font-black text-[#6B5848]">
                       {product.prixReduit.toFixed(2)}€
                     </span>
                     <span className="text-xl text-stone-400 line-through">
                       {product.prix.toFixed(2)}€
                     </span>
-                    <span className="bg-amber-700 text-white px-2 py-0.5 text-xs font-black uppercase">
+                    <span className="bg-[#493A2E] text-white px-2 py-0.5 text-xs font-black uppercase">
                       -{Math.round(((product.prix - product.prixReduit) / product.prix) * 100)}%
                     </span>
                   </>
                 ) : (
-                  <span className="text-3xl font-black text-stone-900">
+                  <span className="text-3xl font-black text-[#6B5848]">
                     {getVariantPrice().toFixed(2)}€
                   </span>
                 )}
@@ -294,9 +294,9 @@ export default function Page() {
 
             {/* Séparateur */}
             <div className="flex items-center gap-3">
-              <div className="w-12 h-0.5 bg-amber-700" />
-              <div className="w-4 h-0.5 bg-amber-700" />
-              <div className="w-2 h-0.5 bg-amber-600" />
+              <div className="w-12 h-0.5 bg-[#493A2E]" />
+              <div className="w-4 h-0.5 bg-[#493A2E]" />
+              <div className="w-2 h-0.5 bg-[#6B5848]" />
             </div>
 
             {/* Variantes */}
@@ -325,8 +325,8 @@ export default function Page() {
                           <div
                             className={`px-4 py-2 text-xs font-black uppercase tracking-wider transition-all duration-200 border ${
                               selectedSize === taille
-                                ? "bg-stone-900 text-white border-stone-900"
-                                : "border-stone-300 text-stone-600 hover:border-stone-900 hover:text-stone-900"
+                                ? "bg-[#6B5848] text-white border-[#6B5848]"
+                                : "border-stone-300 text-stone-600 hover:border-stone-900 hover:text-[#6B5848]"
                             }`}
                           >
                             {taille}
@@ -341,7 +341,7 @@ export default function Page() {
                 {getUniqueValues("couleur").length > 0 && (
                   <div>
                     <label className="block text-xs font-black uppercase tracking-widest text-stone-500 mb-3">
-                      Couleur : <span className="font-normal normal-case text-stone-900">{selectedColor || "Sélectionnez"}</span>
+                      Couleur : <span className="font-normal normal-case text-[#6B5848]">{selectedColor || "Sélectionnez"}</span>
                     </label>
                     <div className="flex flex-wrap gap-3">
                       {getUniqueValues("couleur").map((couleur) => {
@@ -372,7 +372,7 @@ export default function Page() {
                                 />
                               </div>
                               <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                                <span className={`text-xs transition-all ${isSelected ? "text-stone-900 font-bold" : "text-stone-400 opacity-0 group-hover:opacity-100"}`}>
+                                <span className={`text-xs transition-all ${isSelected ? "text-[#6B5848] font-bold" : "text-stone-400 opacity-0 group-hover:opacity-100"}`}>
                                   {couleur}
                                 </span>
                               </div>
@@ -399,7 +399,7 @@ export default function Page() {
                       aria-label="Diminuer la quantité"
                       onClick={() => handleQuantityChange("decrement")}
                       disabled={quantity <= 1}
-                      className="h-10 w-10 flex items-center justify-center border-r border-stone-300 text-stone-600 hover:text-stone-900 disabled:opacity-30 transition-colors"
+                      className="h-10 w-10 flex items-center justify-center border-r border-stone-300 text-stone-600 hover:text-[#6B5848] disabled:opacity-30 transition-colors"
                     >
                       <IconMinus className="h-3 w-3" />
                     </button>
@@ -410,7 +410,7 @@ export default function Page() {
                       type="button"
                       aria-label="Augmenter la quantité"
                       onClick={() => handleQuantityChange("increment")}
-                      className="h-10 w-10 flex items-center justify-center border-l border-stone-300 text-stone-600 hover:text-stone-900 transition-colors"
+                      className="h-10 w-10 flex items-center justify-center border-l border-stone-300 text-stone-600 hover:text-[#6B5848] transition-colors"
                     >
                       <IconPlus className="h-3 w-3" />
                     </button>
@@ -437,7 +437,7 @@ export default function Page() {
               {/* Bouton panier */}
               <button
                 type="button"
-                className="w-full h-14 text-sm font-black uppercase tracking-widest bg-stone-900 hover:bg-stone-800 text-white transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3 cursor-pointer"
+                className="w-full h-14 text-sm font-black uppercase tracking-widest bg-[#6B5848] hover:bg-[#493A2E] text-white transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3 cursor-pointer"
                 disabled={getMaxQuantity() === 0}
                 onClick={() => {
                   if (product) {
@@ -466,18 +466,18 @@ export default function Page() {
             {/* Avantages */}
             <div className="grid grid-cols-3 gap-px bg-stone-200">
               <div className="bg-stone-100 p-4 flex flex-col items-center text-center gap-2">
-                <IconTruck className="h-5 w-5 text-amber-700" stroke={1.5} />
-                <p className="text-xs font-black uppercase tracking-wide text-stone-900">Livraison rapide</p>
+                <IconTruck className="h-5 w-5 text-[#6B5848]" stroke={1.5} />
+                <p className="text-xs font-black uppercase tracking-wide text-[#6B5848]">Livraison rapide</p>
                 <p className="text-xs text-stone-400">Sous 24-48h</p>
               </div>
               <div className="bg-stone-100 p-4 flex flex-col items-center text-center gap-2">
-                <IconShieldCheck className="h-5 w-5 text-amber-700" stroke={1.5} />
-                <p className="text-xs font-black uppercase tracking-wide text-stone-900">Qualité premium</p>
+                <IconShieldCheck className="h-5 w-5 text-[#6B5848]" stroke={1.5} />
+                <p className="text-xs font-black uppercase tracking-wide text-[#6B5848]">Qualité premium</p>
                 <p className="text-xs text-stone-400">Sélectionné avec soin</p>
               </div>
               <div className="bg-stone-100 p-4 flex flex-col items-center text-center gap-2">
-                <IconHeadset className="h-5 w-5 text-amber-600" stroke={1.5} />
-                <p className="text-xs font-black uppercase tracking-wide text-stone-900">Support 7j/7</p>
+                <IconHeadset className="h-5 w-5 text-[#6B5848]" stroke={1.5} />
+                <p className="text-xs font-black uppercase tracking-wide text-[#6B5848]">Support 7j/7</p>
                 <p className="text-xs text-stone-400">Par chat & email</p>
               </div>
             </div>
