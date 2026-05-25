@@ -92,7 +92,7 @@ const defaultConfig: HomePageConfig = {
   category_5_name: "Sacs",
   category_5_subtitle: "Élégance et praticité au quotidien",
   category_5_button_text: "Découvrir",
-  category_5_link: "/store/sacs",
+  category_5_link: "categories/femmes/sacs",
   category_5_image: "/images/category-sacs.jpg",
 
   // Video/Promo Section
