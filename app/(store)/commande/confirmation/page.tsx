@@ -296,7 +296,7 @@ function OrderConfirmationContent() {
   return (
     <div className="min-h-screen bg-stone-50">
       {/* Top accent bar */}
-      <div className="h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-purple-500" />
+      <div className="h-1 bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400" />
 
       {/* Header */}
       <header className="bg-white border-b border-stone-200 px-4 py-4">

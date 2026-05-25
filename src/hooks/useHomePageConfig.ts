@@ -37,6 +37,11 @@ interface HomePageConfig {
   category_4_button_text: string;
   category_4_link: string;
   category_4_image: string;
+  category_5_name: string;
+  category_5_subtitle: string;
+  category_5_button_text: string;
+  category_5_link: string;
+  category_5_image: string;
 
   // Video/Promo Section
   promo_section_title: string;
@@ -84,6 +89,11 @@ const defaultConfig: HomePageConfig = {
   category_4_button_text: "Découvrir",
   category_4_link: "/store/chaussures",
   category_4_image: "/images/category-chaussures.jpg",
+  category_5_name: "Sacs",
+  category_5_subtitle: "Élégance et praticité au quotidien",
+  category_5_button_text: "Découvrir",
+  category_5_link: "/store/sacs",
+  category_5_image: "/images/category-sacs.jpg",
 
   // Video/Promo Section
   promo_section_title: "LIMITED OFFER",
@@ -174,6 +184,11 @@ export function useHomePageConfig() {
         category_4_button_text: configMap["category_4_button_text"] || defaultConfig.category_4_button_text,
         category_4_link: configMap["category_4_link"] || defaultConfig.category_4_link,
         category_4_image: configMap["category_4_image"] || defaultConfig.category_4_image,
+        category_5_name: configMap["category_5_name"] || defaultConfig.category_5_name,
+        category_5_subtitle: configMap["category_5_subtitle"] || defaultConfig.category_5_subtitle,
+        category_5_button_text: configMap["category_5_button_text"] || defaultConfig.category_5_button_text,
+        category_5_link: configMap["category_5_link"] || defaultConfig.category_5_link,
+        category_5_image: configMap["category_5_image"] || defaultConfig.category_5_image,
 
         // Video/Promo Section
         promo_section_title: configMap["promo_section_title"] || defaultConfig.promo_section_title,

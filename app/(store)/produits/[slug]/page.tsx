@@ -167,7 +167,7 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-stone-100">
       {/* Top accent bar */}
-      <div className="h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-purple-500" />
+      <div className="h-1 bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -189,14 +189,14 @@ export default function Page() {
                       {index === 0 && (
                         <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
                           {product.prixReduit && product.prixReduit > 0 && (
-                            <span className="bg-orange-500 text-stone-900 px-2 py-0.5 text-xs font-black uppercase">
+                            <span className="bg-amber-700 text-white px-2 py-0.5 text-xs font-black uppercase">
                               PROMO
                             </span>
                           )}
                           {product.collections?.some(
                             (pc) => pc.collection.nom.toLowerCase() === "nouveautés"
                           ) && (
-                            <span className="bg-yellow-400 text-zinc-900 px-2 py-0.5 text-xs font-black uppercase">
+                            <span className="bg-amber-500 text-white px-2 py-0.5 text-xs font-black uppercase">
                               NEW
                             </span>
                           )}
@@ -234,7 +234,7 @@ export default function Page() {
             <div>
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <span className="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
+                  <span className="text-amber-700 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
                     — {product.collections[0]?.collection.nom || "PRODUIT"}
                   </span>
                   <h1 className="text-3xl md:text-4xl font-black text-stone-900 uppercase leading-none">
@@ -246,12 +246,12 @@ export default function Page() {
                   type="button"
                   onClick={handleWishlistToggle}
                   aria-label="Ajouter aux favoris"
-                  className="ml-4 w-10 h-10 flex items-center justify-center border border-stone-300 hover:border-orange-500 hover:text-orange-500 text-stone-600 transition-all duration-300"
+                  className="ml-4 w-10 h-10 flex items-center justify-center border border-stone-300 hover:border-amber-700 hover:text-amber-700 text-stone-600 transition-all duration-300"
                 >
                   <IconHeart
                     className={`h-5 w-5 ${
                       product && hasHydrated && isInWishlist(product.id)
-                        ? "text-orange-500 fill-current"
+                        ? "text-amber-700 fill-current"
                         : ""
                     }`}
                   />
@@ -274,13 +274,13 @@ export default function Page() {
               <div className="flex items-center gap-4">
                 {product.prixReduit && product.prixReduit > 0 ? (
                   <>
-                    <span className="text-3xl font-black text-orange-400">
+                    <span className="text-3xl font-black text-amber-700">
                       {product.prixReduit.toFixed(2)}€
                     </span>
                     <span className="text-xl text-stone-400 line-through">
                       {product.prix.toFixed(2)}€
                     </span>
-                    <span className="bg-orange-500 text-stone-900 px-2 py-0.5 text-xs font-black uppercase">
+                    <span className="bg-amber-700 text-white px-2 py-0.5 text-xs font-black uppercase">
                       -{Math.round(((product.prix - product.prixReduit) / product.prix) * 100)}%
                     </span>
                   </>
@@ -294,9 +294,9 @@ export default function Page() {
 
             {/* Séparateur */}
             <div className="flex items-center gap-3">
-              <div className="w-12 h-0.5 bg-orange-500" />
-              <div className="w-4 h-0.5 bg-yellow-400" />
-              <div className="w-2 h-0.5 bg-purple-500" />
+              <div className="w-12 h-0.5 bg-amber-700" />
+              <div className="w-4 h-0.5 bg-amber-700" />
+              <div className="w-2 h-0.5 bg-amber-600" />
             </div>
 
             {/* Variantes */}
@@ -466,17 +466,17 @@ export default function Page() {
             {/* Avantages */}
             <div className="grid grid-cols-3 gap-px bg-stone-200">
               <div className="bg-stone-100 p-4 flex flex-col items-center text-center gap-2">
-                <IconTruck className="h-5 w-5 text-yellow-500" stroke={1.5} />
+                <IconTruck className="h-5 w-5 text-amber-700" stroke={1.5} />
                 <p className="text-xs font-black uppercase tracking-wide text-stone-900">Livraison rapide</p>
                 <p className="text-xs text-stone-400">Sous 24-48h</p>
               </div>
               <div className="bg-stone-100 p-4 flex flex-col items-center text-center gap-2">
-                <IconShieldCheck className="h-5 w-5 text-orange-500" stroke={1.5} />
+                <IconShieldCheck className="h-5 w-5 text-amber-700" stroke={1.5} />
                 <p className="text-xs font-black uppercase tracking-wide text-stone-900">Qualité premium</p>
                 <p className="text-xs text-stone-400">Sélectionné avec soin</p>
               </div>
               <div className="bg-stone-100 p-4 flex flex-col items-center text-center gap-2">
-                <IconHeadset className="h-5 w-5 text-purple-500" stroke={1.5} />
+                <IconHeadset className="h-5 w-5 text-amber-600" stroke={1.5} />
                 <p className="text-xs font-black uppercase tracking-wide text-stone-900">Support 7j/7</p>
                 <p className="text-xs text-stone-400">Par chat & email</p>
               </div>

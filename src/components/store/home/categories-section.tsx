@@ -16,17 +16,17 @@ type Category = {
 };
 
 const accentColors = [
-  "border-orange-500 group-hover:bg-orange-500",
-  "border-yellow-400 group-hover:bg-yellow-400",
-  "border-purple-500 group-hover:bg-purple-500",
-  "border-cyan-400 group-hover:bg-cyan-400",
+  "border-amber-700 group-hover:bg-amber-700",
+  "border-amber-600 group-hover:bg-amber-600",
+  "border-amber-500 group-hover:bg-amber-500",
+  "border-amber-400 group-hover:bg-amber-400",
 ];
 
 const tagColors = [
-  "bg-orange-500",
-  "bg-yellow-400 text-zinc-900",
-  "bg-purple-500",
-  "bg-cyan-400 text-zinc-900",
+  "bg-amber-700 text-white",
+  "bg-amber-600 text-white",
+  "bg-amber-500 text-white",
+  "bg-amber-400 text-white",
 ];
 
 export default function CategoriesSection() {
@@ -64,6 +64,13 @@ export default function CategoriesSection() {
         link: config.category_4_link,
         image: config.category_4_image,
       },
+      {
+        title: config.category_5_name,
+        subtitle: config.category_5_subtitle,
+        buttonText: config.category_5_button_text,
+        link: config.category_5_link,
+        image: config.category_5_image,
+      },
     ];
 
     categoryData.forEach((category, index) => {
@@ -88,8 +95,8 @@ export default function CategoriesSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse">
             <div className="h-6 bg-zinc-800 rounded w-32 mb-12"></div>
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-              {Array.from({ length: 3 }).map((_, i) => (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="h-96 bg-zinc-800 rounded"></div>
               ))}
             </div>
@@ -105,7 +112,7 @@ export default function CategoriesSection() {
         {/* Header */}
         <div className="flex items-end justify-between mb-12">
           <div>
-            <span className="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
+            <span className="text-amber-700 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
               — DROP
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-stone-900 uppercase leading-none">
@@ -118,12 +125,12 @@ export default function CategoriesSection() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {categories.map((category, index) => (
             <Link
               key={index}
               href={`/${category.link}`}
-              className={`group relative overflow-hidden block ${index === 0 ? "col-span-2 lg:col-span-1 row-span-1" : ""}`}
+              className="group relative overflow-hidden block"
             >
               {/* Image */}
               <div className="relative h-72 md:h-96 overflow-hidden bg-stone-200">
@@ -138,7 +145,7 @@ export default function CategoriesSection() {
 
                 {/* Featured badge */}
                 {category.featured && (
-                  <div className={`absolute top-4 left-4 z-20 px-3 py-1 text-xs font-black uppercase tracking-wider text-stone-900 ${tagColors[0]}`}>
+                  <div className={`absolute top-4 left-4 z-20 px-3 py-1 text-xs font-black uppercase tracking-wider text-stone-800 ${tagColors[0]}`}>
                     POPULAIRE
                   </div>
                 )}

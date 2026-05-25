@@ -69,7 +69,7 @@ export default function FeaturedProducts() {
         {/* Header */}
         <div className="flex items-end justify-between mb-12">
           <div>
-            <span className="text-yellow-400 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
+            <span className="text-amber-700 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
               — FRESH
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-stone-900 uppercase leading-none">
@@ -81,7 +81,7 @@ export default function FeaturedProducts() {
             <button
               type="button"
               onClick={() => api?.scrollPrev()}
-              className="w-10 h-10 border border-stone-300 hover:border-yellow-400 hover:text-yellow-400 text-stone-500 transition-all duration-300 flex items-center justify-center"
+              className="w-10 h-10 border border-stone-300 hover:border-amber-700 hover:text-amber-700 text-stone-500 transition-all duration-300 flex items-center justify-center"
               aria-label="Précédent"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -89,7 +89,7 @@ export default function FeaturedProducts() {
             <button
               type="button"
               onClick={() => api?.scrollNext()}
-              className="w-10 h-10 border border-stone-300 hover:border-yellow-400 hover:text-yellow-400 text-stone-500 transition-all duration-300 flex items-center justify-center"
+              className="w-10 h-10 border border-stone-300 hover:border-amber-700 hover:text-amber-700 text-stone-500 transition-all duration-300 flex items-center justify-center"
               aria-label="Suivant"
             >
               <ChevronRight className="h-5 w-5" />
@@ -138,30 +138,30 @@ export default function FeaturedProducts() {
                       {/* Badges */}
                       <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
                         {product.prixReduit && product.prixReduit > 0 && (
-                          <span className="bg-orange-500 text-stone-900 px-2 py-0.5 text-xs font-black uppercase">
+                          <span className="bg-amber-700 text-white px-2 py-0.5 text-xs font-black uppercase">
                             PROMO
                           </span>
                         )}
                         {product.collections?.some((pc) => pc.collection.nom.toLowerCase() === "nouveautés") && (
-                          <span className="bg-yellow-400 text-zinc-900 px-2 py-0.5 text-xs font-black uppercase">
+                          <span className="bg-amber-500 text-white px-2 py-0.5 text-xs font-black uppercase">
                             NEW
                           </span>
                         )}
                       </div>
 
                       {/* Bottom accent bar on hover */}
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                     </div>
 
                     {/* Info */}
                     <div>
-                      <h3 className="text-stone-900 text-sm font-bold uppercase tracking-wide truncate group-hover:text-yellow-400 transition-colors duration-300">
+                      <h3 className="text-stone-900 text-sm font-bold uppercase tracking-wide truncate group-hover:text-amber-700 transition-colors duration-300">
                         {product.nom}
                       </h3>
                       <div className="flex items-center gap-2 mt-1">
                         {product.prixReduit && product.prixReduit > 0 ? (
                           <>
-                            <span className="text-orange-400 font-black text-base">
+                            <span className="text-amber-700 font-black text-base">
                               {product.prixReduit.toFixed(2)}€
                             </span>
                             <span className="text-stone-500 line-through text-sm">

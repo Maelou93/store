@@ -6,34 +6,34 @@ export default function CustomerExperience() {
       icon: <IconShieldCheck className="h-8 w-8" stroke={1.5} />,
       title: "Qualité Premium",
       description: "Produits soigneusement sélectionnés pour leur qualité",
-      color: "text-orange-500",
-      accent: "bg-orange-500",
+      color: "text-amber-700",
+      accent: "bg-amber-700",
     },
     {
       icon: <IconTruck className="h-8 w-8" stroke={1.5} />,
       title: "Livraison Rapide",
       description: "Expédition sous 24-48h partout en France",
-      color: "text-yellow-500",
-      accent: "bg-yellow-400",
+      color: "text-amber-600",
+      accent: "bg-amber-600",
     },
     {
       icon: <IconHeadset className="h-8 w-8" stroke={1.5} />,
       title: "Support Client",
       description: "Assistance 7j/7 par chat et email",
-      color: "text-purple-600",
-      accent: "bg-purple-500",
+      color: "text-amber-500",
+      accent: "bg-amber-500",
     },
   ];
 
   return (
     <section className="bg-stone-900 py-16">
       {/* Top accent bar */}
-      <div className="h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-purple-500 mb-16" />
+      <div className="h-1 bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400 mb-16" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
-          <span className="text-orange-500 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
+          <span className="text-amber-700 text-xs font-bold tracking-[0.3em] uppercase block mb-2">
             — POURQUOI NOUS
           </span>
           <h2 className="text-3xl md:text-4xl font-black text-white uppercase leading-none">

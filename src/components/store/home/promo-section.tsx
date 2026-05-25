@@ -83,11 +83,11 @@ export default function PromoSection() {
           </div>
 
           {/* Top accent bar */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-purple-500" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400" />
 
           <div className="relative px-8 md:px-16 py-12 flex flex-col items-center text-center gap-8">
             {/* Label */}
-            <span className="text-orange-500 text-xs font-black tracking-[0.4em] uppercase">
+            <span className="text-amber-700 text-xs font-black tracking-[0.4em] uppercase">
               — OFFRE LIMITÉE
             </span>
 
@@ -118,8 +118,8 @@ export default function PromoSection() {
                 <span className="text-stone-500 text-sm uppercase tracking-wider">
                   Ton code :
                 </span>
-                <div className="border-2 border-yellow-400 px-8 py-3">
-                  <span className="text-yellow-400 font-black text-2xl tracking-[0.3em] uppercase font-mono">
+                <div className="border-2 border-amber-700 px-8 py-3">
+                  <span className="text-amber-700 font-black text-2xl tracking-[0.3em] uppercase font-mono">
                     {config.selectedDiscount.code}
                   </span>
                 </div>

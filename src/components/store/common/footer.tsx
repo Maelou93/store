@@ -95,10 +95,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/categories/hommes/chaussures"
+                  href="/categories/femmes/vetements/accessoires"
                   className="hover:text-gray-900"
                 >
-                  Chaussures homme
+                  Accessoires
                 </Link>
               </li>
             </ul>

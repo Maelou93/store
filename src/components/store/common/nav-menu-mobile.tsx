@@ -33,8 +33,8 @@ const menuItems: { titre: string; link: string }[] = [
     link: "/categories/femmes/chaussures",
   },
   {
-    titre: "Chaussures homme",
-    link: "/categories/hommes/chaussures",
+    titre: "Accessoires",
+    link: "/categories/femmes/vetements/accessoires",
   },
   {
     titre: "Sacs",

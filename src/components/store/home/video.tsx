@@ -26,28 +26,28 @@ export default function Video() {
   return (
     <section className="bg-stone-100 overflow-hidden">
       {/* Top gradient bar */}
-      <div className="h-1 bg-gradient-to-r from-purple-500 via-yellow-400 to-orange-500 mb-20" />
+      <div className="h-1 bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400 mb-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           {/* Text */}
           <div className="space-y-8">
             <div>
-              <span className="text-purple-600 text-xs font-bold tracking-[0.3em] uppercase block mb-3">
+              <span className="text-amber-700 text-xs font-bold tracking-[0.3em] uppercase block mb-3">
                 — IW STORE
               </span>
               <h2 className="text-4xl md:text-5xl font-black text-stone-900 uppercase leading-none">
                 {config.promo_section_title}
               </h2>
             </div>
-            <p className="text-stone-500 text-base leading-relaxed border-l-2 border-purple-500 pl-4">
+            <p className="text-stone-500 text-base leading-relaxed border-l-2 border-amber-700 pl-4">
               {config.promo_section_description}
             </p>
             {/* Accent lines */}
             <div className="flex items-center gap-3">
-              <div className="w-12 h-0.5 bg-purple-500" />
-              <div className="w-4 h-0.5 bg-yellow-400" />
-              <div className="w-2 h-0.5 bg-orange-500" />
+              <div className="w-12 h-0.5 bg-amber-800" />
+              <div className="w-4 h-0.5 bg-amber-600" />
+              <div className="w-2 h-0.5 bg-amber-400" />
             </div>
             {/* Stats row */}
             <div className="flex gap-8 pt-2">
@@ -78,10 +78,10 @@ export default function Video() {
           <div className="flex justify-center">
             <div className="relative group w-full max-w-sm">
               {/* Glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-yellow-400 to-orange-500 opacity-20 group-hover:opacity-40 blur-sm transition-opacity duration-500" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400 opacity-20 group-hover:opacity-40 blur-sm transition-opacity duration-500" />
               {/* Corner accents */}
-              <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-purple-500 z-20" />
-              <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-orange-500 z-20" />
+              <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-amber-800 z-20" />
+              <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-amber-600 z-20" />
               {/* Label */}
               <div className="absolute top-3 left-3 z-20 bg-stone-900/80 px-2 py-1">
                 <span className="text-white text-xs font-black uppercase tracking-widest">
@@ -92,7 +92,7 @@ export default function Video() {
                 src="/video/394df19dfa08d1f5c710dbb48801340b_1773120504.mp4"
                 controls
                 muted
-                className="relative w-full border border-stone-300 group-hover:border-purple-500 transition-colors duration-500"
+                className="relative w-full border border-stone-300 group-hover:border-amber-700 transition-colors duration-500"
               >
                 Votre navigateur ne supporte pas la lecture de vidéos.
               </video>
