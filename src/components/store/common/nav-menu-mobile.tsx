@@ -38,7 +38,7 @@ const menuItems: { titre: string; link: string }[] = [
   },
   {
     titre: "Sacs",
-    link: "/categories/femmes/vetements/sacs",
+    link: "/categories/femmes/sacs",
   },
 ];
 
