@@ -21,7 +21,7 @@ export const AnnounecemntBar = () => {
 
   return (
     <div className="w-full md:max-w-7xl md:mx-auto md:px-8">
-      <div className="bg-stone-900 text-white py-2">
+      <div className="bg-[#493A2E] text-white py-2">
         <Carousel
           plugins={[plugin.current]}
           className="w-full"
