@@ -45,7 +45,7 @@ export function ProductGrid({ products }: ProductGridProps) {
 
             {/* Badges */}
             <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
-              {product.prixReduit && product.prixReduit > 0 && (
+              {product.prixReduit != null && product.prixReduit > 0 && (
                 <span className="bg-[#493A2E] text-white px-2 py-0.5 text-xs font-black uppercase">
                   PROMO
                 </span>
@@ -69,7 +69,7 @@ export function ProductGrid({ products }: ProductGridProps) {
               {product.nom}
             </h3>
             <div className="flex items-center gap-2 mt-1">
-              {product.prixReduit && product.prixReduit > 0 ? (
+              {product.prixReduit != null && product.prixReduit > 0 ? (
                 <>
                   <span className="text-[#6B5848] font-black text-base">
                     {product.prixReduit.toFixed(2)}€

@@ -1,7 +1,5 @@
 import { ProductGrid } from "@/components/store/product-grid";
 import { nodePrisma as prisma } from "@/lib/prisma/node-client";
-import { Collection } from "@/types/product";
-import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -10,8 +8,7 @@ export default async function Page(props: {
 }) {
   const params = await props.params;
 
-  const [collections, products, currentCollection] = await Promise.all([
-    prisma.collection.findMany({ orderBy: { nom: "asc" } }),
+  const [products, currentCollection] = await Promise.all([
     prisma.product.findMany({
       where: {
         AND: [
@@ -19,6 +16,8 @@ export default async function Page(props: {
           { collections: { some: { collection: { slug: "femmes" } } } },
           { collections: { some: { collection: { slug: "vetements" } } } },
           { collections: { none: { collection: { slug: "chaussures" } } } },
+          { collections: { none: { collection: { slug: "sacs" } } } },
+          { collections: { none: { collection: { slug: "accessoires" } } } },
         ],
       },
       include: {
@@ -28,15 +27,6 @@ export default async function Page(props: {
     }),
     prisma.collection.findUnique({ where: { slug: params.slug } }),
   ]);
-
-  const filteredCollections = collections.filter(
-    (c: Collection) =>
-      c.slug !== "chaussures" &&
-      c.slug !== "hommes" &&
-      c.slug !== "femmes" &&
-      c.slug !== "nouveautes" &&
-      c.slug !== "accessoires"
-  );
 
   return (
     <div className="min-h-screen bg-stone-100">
@@ -54,53 +44,6 @@ export default async function Page(props: {
               {currentCollection.description}
             </p>
           )}
-        </div>
-      </div>
-
-      {/* Filters */}
-      <div className="border-b border-stone-200 bg-stone-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-wrap gap-2">
-            <Link
-              href="/categories/femmes/vetements"
-              className="px-4 py-1.5 text-xs font-black uppercase tracking-wider border border-stone-300 text-stone-600 hover:border-stone-900 hover:text-[#6B5848] transition-colors"
-            >
-              Tout
-            </Link>
-            {filteredCollections.map((collection: Collection) => (
-              <Link
-                key={collection.id}
-                href={`/categories/femmes/vetements/${collection.slug}`}
-                className={`px-4 py-1.5 text-xs font-black uppercase tracking-wider transition-colors ${
-                  collection.slug === params.slug
-                    ? "bg-stone-900 text-white"
-                    : "border border-stone-300 text-stone-600 hover:border-stone-900 hover:text-[#6B5848]"
-                }`}
-              >
-                {collection.nom}
-              </Link>
-            ))}
-            <Link
-              href="/categories/femmes/accessoires"
-              className={`px-4 py-1.5 text-xs font-black uppercase tracking-wider transition-colors ${
-                params.slug === "accessoires"
-                  ? "bg-stone-900 text-white"
-                  : "border border-stone-300 text-stone-600 hover:border-stone-900 hover:text-[#6B5848]"
-              }`}
-            >
-              Accessoires
-            </Link>
-            <Link
-              href="/categories/femmes/vetements/nouveautes"
-              className={`px-4 py-1.5 text-xs font-black uppercase tracking-wider transition-colors ${
-                params.slug === "nouveautes"
-                  ? "bg-[#493A2E] text-white"
-                  : "border border-[#493A2E] text-[#6B5848] hover:bg-[#493A2E] hover:text-white"
-              }`}
-            >
-              Nouveautés
-            </Link>
-          </div>
         </div>
       </div>
 
