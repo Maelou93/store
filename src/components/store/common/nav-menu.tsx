@@ -16,26 +16,24 @@ type MenuItem = { titre: string; link: string } | { titre: string; link?: never;
 
 const menuItems: MenuItem[] = [
   {
-    titre: "Manteaux/Vestes",
-    link: "/categories/femmes/vetements/manteaux-vestes",
-  },
-  {
-    titre: "Hauts/Top",
-    link: "/categories/femmes/vetements/hauts-top",
-  },
-  {
-    titre: "Pantalons",
-    link: "/categories/femmes/vetements/pantalons",
-  },
-  {
-    titre: "Ensembles",
-    link: "/categories/femmes/vetements/ensembles",
+    titre: "Vêtements",
+    children: [
+      { titre: "Tout voir", link: "/categories/femmes/vetements" },
+      { titre: "Hauts/Tops", link: "/categories/femmes/vetements/hauts-top" },
+      { titre: "Pantalons", link: "/categories/femmes/vetements/pantalons" },
+      { titre: "Ensembles", link: "/categories/femmes/vetements/ensembles" },
+      { titre: "Manteaux/Vestes", link: "/categories/femmes/vetements/manteaux-vestes" },
+    ],
   },
   {
     titre: "Chaussures",
     children: [
-      { titre: "Chaussures femme", link: "/categories/femmes/chaussures" },
-      { titre: "Accessoires", link: "/categories/femmes/accessoires" },
+      { titre: "Tout voir", link: "/categories/femmes/chaussures" },
+      { titre: "Baskets", link: "/categories/femmes/chaussures/baskets" },
+      { titre: "Sandales", link: "/categories/femmes/chaussures/sandales" },
+      { titre: "Ballerines", link: "/categories/femmes/chaussures/ballerines" },
+      { titre: "Talons", link: "/categories/femmes/chaussures/talons" },
+      { titre: "Mocassins", link: "/categories/femmes/chaussures/mocassins" },
     ],
   },
   {
@@ -45,6 +43,10 @@ const menuItems: MenuItem[] = [
   {
     titre: "Accessoires",
     link: "/categories/femmes/accessoires",
+  },
+  {
+    titre: "Nouveautés",
+    link: "/categories/femmes/nouveautes",
   },
 ];
 

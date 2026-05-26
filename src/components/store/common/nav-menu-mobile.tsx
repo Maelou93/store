@@ -11,35 +11,21 @@ import { IconMenuDeep, IconSquareX } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
 
-const menuItems: { titre: string; link: string }[] = [
-  {
-    titre: "Manteaux/Vestes",
-    link: "/categories/femmes/vetements/manteaux-vestes",
-  },
-  {
-    titre: "Hauts/Top",
-    link: "/categories/femmes/vetements/hauts-top",
-  },
-  {
-    titre: "Pantalons",
-    link: "/categories/femmes/vetements/pantalons",
-  },
-  {
-    titre: "Ensembles",
-    link: "/categories/femmes/vetements/ensembles",
-  },
-  {
-    titre: "Chaussures femme",
-    link: "/categories/femmes/chaussures",
-  },
-  {
-    titre: "Accessoires",
-    link: "/categories/femmes/accessoires",
-  },
-  {
-    titre: "Sacs",
-    link: "/categories/femmes/sacs",
-  },
+const menuItems: { titre: string; link: string; indent?: boolean }[] = [
+  { titre: "Vêtements", link: "/categories/femmes/vetements" },
+  { titre: "Hauts/Tops", link: "/categories/femmes/vetements/hauts-top", indent: true },
+  { titre: "Pantalons", link: "/categories/femmes/vetements/pantalons", indent: true },
+  { titre: "Ensembles", link: "/categories/femmes/vetements/ensembles", indent: true },
+  { titre: "Manteaux/Vestes", link: "/categories/femmes/vetements/manteaux-vestes", indent: true },
+  { titre: "Chaussures", link: "/categories/femmes/chaussures" },
+  { titre: "Baskets", link: "/categories/femmes/chaussures/baskets", indent: true },
+  { titre: "Sandales", link: "/categories/femmes/chaussures/sandales", indent: true },
+  { titre: "Ballerines", link: "/categories/femmes/chaussures/ballerines", indent: true },
+  { titre: "Talons", link: "/categories/femmes/chaussures/talons", indent: true },
+  { titre: "Mocassins", link: "/categories/femmes/chaussures/mocassins", indent: true },
+  { titre: "Sacs", link: "/categories/femmes/sacs" },
+  { titre: "Accessoires", link: "/categories/femmes/accessoires" },
+  { titre: "Nouveautés", link: "/categories/femmes/nouveautes" },
 ];
 
 export const NavBarMobile = () => {
@@ -78,10 +64,10 @@ export const NavBarMobile = () => {
           <div className="space-y-3">
             <ul className="space-y-4 pl-4">
               {menuItems.map((menu) => (
-                <li key={menu.titre} onClick={() => setOpenMenu(false)}>
+                <li key={menu.titre} onClick={() => setOpenMenu(false)} className={menu.indent ? "pl-4" : ""}>
                   <Link
                     href={menu.link}
-                    className="font-semibold text-[#6B5848] uppercase tracking-wide"
+                    className={menu.indent ? "text-sm text-[#88755C] uppercase tracking-wide" : "font-semibold text-[#6B5848] uppercase tracking-wide"}
                   >
                     {menu.titre}
                   </Link>
