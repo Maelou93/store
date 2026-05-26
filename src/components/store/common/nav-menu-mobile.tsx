@@ -27,6 +27,9 @@ const menuItems: MenuItem[] = [
       { titre: "Pantalons", link: "/categories/femmes/vetements/pantalons" },
       { titre: "Ensembles", link: "/categories/femmes/vetements/ensembles" },
       { titre: "Manteaux/Vestes", link: "/categories/femmes/vetements/manteaux-vestes" },
+      { titre: "Jupes", link: "/categories/femmes/vetements/jupes" },
+      { titre: "Robes", link: "/categories/femmes/vetements/robes" },
+      { titre: "Maillots de bain", link: "/categories/femmes/vetements/maillots-de-bain" },
     ],
   },
   {

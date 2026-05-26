@@ -17,6 +17,7 @@ export default async function Page(props: {
         AND: [
           { collections: { some: { collection: { slug: params.slug } } } },
           { collections: { some: { collection: { slug: "femmes" } } } },
+          { collections: { some: { collection: { slug: "vetements" } } } },
           { collections: { none: { collection: { slug: "chaussures" } } } },
         ],
       },
