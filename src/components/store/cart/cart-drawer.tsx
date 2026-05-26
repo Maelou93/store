@@ -520,7 +520,7 @@ export const CartDrawer = () => {
 
             <div className="space-y-2">
               <Button
-                className="w-full cursor-pointer"
+                className="w-full cursor-pointer bg-[#493A2E] hover:bg-[#6B5848] text-white"
                 size="lg"
                 onClick={() => {
                   // TODO: Passer les informations de réduction à la page de confirmation
