@@ -42,6 +42,7 @@ const menuItems: MenuItem[] = [
       { titre: "Ballerines", link: "/categories/femmes/chaussures/ballerines" },
       { titre: "Talons", link: "/categories/femmes/chaussures/talons" },
       { titre: "Mocassins", link: "/categories/femmes/chaussures/mocassins" },
+      { titre: "Mules", link: "/categories/femmes/chaussures/mules" },
     ],
   },
   { titre: "Sacs", link: "/categories/femmes/sacs" },
