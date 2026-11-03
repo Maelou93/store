@@ -38,6 +38,7 @@ const menuItems: MenuItem[] = [
       { titre: "Talons", link: "/categories/femmes/chaussures/talons" },
       { titre: "Mocassins", link: "/categories/femmes/chaussures/mocassins" },
       { titre: "Mules", link: "/categories/femmes/chaussures/mules" },
+      { titre: "Bottes", link: "/categories/femmes/chaussures/bottes" },
     ],
   },
   {
@@ -51,6 +52,10 @@ const menuItems: MenuItem[] = [
   {
     titre: "Nouveautés",
     link: "/categories/femmes/nouveautes",
+  },
+  {
+    titre: "Dernière chance",
+    link: "/categories/femmes/derniere-chance",
   },
 ];
 

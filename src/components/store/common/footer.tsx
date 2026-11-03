@@ -50,6 +50,7 @@ export default function Footer() {
               <li><Link href="/categories/femmes/chaussures/ballerines" className="hover:text-[#6B5848]">Ballerines</Link></li>
               <li><Link href="/categories/femmes/chaussures/talons" className="hover:text-[#6B5848]">Talons</Link></li>
               <li><Link href="/categories/femmes/chaussures/mocassins" className="hover:text-[#6B5848]">Mocassins</Link></li>
+              <li><Link href="/categories/femmes/chaussures/bottes" className="hover:text-[#6B5848]">Bottes</Link></li>
             </ul>
           </div>
 
@@ -59,6 +60,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-600">
               <li><Link href="/categories/femmes/sacs" className="hover:text-[#6B5848]">Sacs</Link></li>
               <li><Link href="/categories/femmes/accessoires" className="hover:text-[#6B5848]">Accessoires</Link></li>
+              <li><Link href="/categories/femmes/derniere-chance" className="hover:text-[#6B5848]">Dernière chance</Link></li>
             </ul>
           </div>
         </div>
