@@ -50,6 +50,7 @@ const menuItems: MenuItem[] = [
   { titre: "Accessoires", link: "/categories/femmes/accessoires" },
   { titre: "Nouveautés", link: "/categories/femmes/nouveautes" },
   { titre: "Dernière chance", link: "/categories/femmes/derniere-chance" },
+  { titre: "Disponible de suite", link: "/categories/femmes/disponible-de-suite" },
 ];
 
 export const NavBarMobile = () => {

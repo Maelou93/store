@@ -57,6 +57,10 @@ const menuItems: MenuItem[] = [
     titre: "Dernière chance",
     link: "/categories/femmes/derniere-chance",
   },
+  {
+    titre: "Disponible de suite",
+    link: "/categories/femmes/disponible-de-suite",
+  },
 ];
 
 export function NavMenu() {

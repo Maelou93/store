@@ -61,6 +61,7 @@ export default function Footer() {
               <li><Link href="/categories/femmes/sacs" className="hover:text-[#6B5848]">Sacs</Link></li>
               <li><Link href="/categories/femmes/accessoires" className="hover:text-[#6B5848]">Accessoires</Link></li>
               <li><Link href="/categories/femmes/derniere-chance" className="hover:text-[#6B5848]">Dernière chance</Link></li>
+              <li><Link href="/categories/femmes/disponible-de-suite" className="hover:text-[#6B5848]">Disponible de suite</Link></li>
             </ul>
           </div>
         </div>
